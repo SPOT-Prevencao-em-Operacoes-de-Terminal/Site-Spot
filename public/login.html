@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title> SPOT | Login</title>
+
+ <script src="./js/sessao.js"></script>
+
+  <link rel="stylesheet" href="./css/cadastro-login.css">
+  <link rel="icon" href="./assets/icon/favicon2.ico">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body onload="listar()">
+  <!--header inicio-->
+  <div class="header">
+    <div class="container-logo">
+     <h1 class="titulo">
+       <a href="index.html">
+            <img src="assets/icon/logo-azul.png" alt="logo" class="logo-site">
+        </a>
+      </h1>
+    </div>
+  </div>
+  <!--header fim-->
+
+  <div class="login">
+    <div class="alerta_erro">
+      <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
+      </div>
+    </div>
+    <div class="container">
+        <div class="container-cadastro">
+        
+        <img src="assets/imgs/imglogin.jpeg" class="img-login" alt="Imagem SPOT">
+
+            <form class="form-contato">
+                <h2>Conecte-se</h2>
+
+                <input 
+                    type="text" 
+                    placeholder="E-mail corporativo"
+                    required
+                >
+
+                <input 
+                    type="password" 
+                    placeholder="Senha"
+                    required
+                >
+
+                <button type="submit">
+                    Conectar
+                </button>
+
+                <p class="form-texto-redirecionamento">
+                Se ainda não possui uma conta, faça o <a href="cadastro-user.html">cadastro</a>.
+            </p>
+
+            </form>
+
+        <div id="div_erros_login"></div>
+      </div>
+    </div>
+  </div>
+<!-- FOOTER -->>
+  </footer>
+
+  <div class="footer-footer">
+    <div class="footer-container">
+      <div class="espaco-lateral">
+      </div>
+      <div class="boxes">
+        <h2 class="footer-titulo">Principal</h2>
+        <div class="footer-menu">
+          <ul>
+            <li id="menu1">
+              <a href="#">Inicial</a>
+            </li>
+            <li>
+              <a href="sobre nos.html">Sobre Nós</a>
+            </li>
+            <li>
+              <a href="#footer-contato">Contato</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="boxes">
+        <h2 class="footer-titulo">Páginas</h2>
+        <div class="footer-menu">
+          <ul>
+            <li>
+              <a href="como-funciona.html">Como Funciona</a>
+            </li>
+            <li>
+              <a href="cadastro.html">Cadastro</a>
+            </li>
+            <li>
+              <a href="login.html">Login</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="boxes">
+        <h2 class="footer-titulo">Categorias</h2>
+        <div class="footer-menu">
+          <ul>
+            <li>
+              <a href="como-funciona.html#titulo-conteudo-passo-a-passo">Funcionalidade da aplicação</a>
+            </li>
+            <li>
+              <a href="#social">Monitoramento inteligente</a>
+            </li>
+            <li>
+              <a href="#monitoramento">Partes monitoradas</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <hr class="linha-footer">
+  </div>
+
+</body>
+
+</html>
+
+<script>
+
+
+    function entrar() {
+        aguardar();
+
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+
+                    setTimeout(function () {
+                        window.location = "./dashboard/cards.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+</script>

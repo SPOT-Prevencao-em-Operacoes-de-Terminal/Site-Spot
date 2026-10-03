@@ -89,3 +89,11 @@ email VARCHAR(200),
 telefone CHAR(11),
 nome_empresa VARCHAR(200)
 );
+
+INSERT INTO empresa (razao_social, nome_fantasia, cnpj, codigo_ativacao) VALUES
+('Companhia Docas de Santos', 'Porto de Santos', '00000000000101', 'SANTOS123'),
+('Portonave S.A. Terminais Portuários de Navegação', 'Porto de Navegantes', '00000000000102', 'NAVEGA123'),
+('TCP - Terminal de Contêineres de Paranaguá S.A.', 'Porto de Paranaguá', '00000000000103', 'PARANA123'),
+('Companhia Docas do Rio de Janeiro', 'Porto do Rio de Janeiro', '00000000000104', 'RIO123'),
+('Complexo Industrial Portuário de Suape', 'Porto de Suape', '00000000000105', 'SUAPE123'),
+('Porto de Itajaí S.A.', 'Porto de Itajaí', '00000000000106', 'ITAJAI123');

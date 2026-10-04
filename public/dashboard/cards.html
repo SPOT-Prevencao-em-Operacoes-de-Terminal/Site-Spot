@@ -53,13 +53,19 @@
                     </a>
                 </nav>
 
-                <div class="perfil-usuario">
-                    <div class="avatar-usuario">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <span class="nome-usuario">Olá, <strong id="b_usuario">Nicolas</strong></span>
-                    <i class="fa-solid fa-chevron-down icone-dropdown"></i>
+                <div class="perfil-usuario" onclick="alternarMenuUsuario(event)">
+                <div class="avatar-usuario">
+                    <i class="fa-solid fa-user"></i>
                 </div>
+                <span class="nome-usuario">Olá, <strong id="b_usuario">Nicolas</strong></span>
+
+                <div class="menu-dropdown-usuario" id="menu-dropdown-usuario">
+                    <a href="../login.html" class="item-dropdown-logout" onclick="limparSessao()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
+                </a>
+                </div>
+            </div>
             </header>
 
             <div class="corpo-painel">
@@ -127,13 +133,18 @@
     </div>
 
     <script>
+
+        function limparSessao() {
+            sessionStorage.clear();
+        }
+
         const listaMaquinas = [
             { id: "01", estado: "normal", cpu: 24, ram: 62, disco: 18 },
             { id: "02", estado: "atencao", cpu: 68, ram: 73, disco: 41 },
             { id: "03", estado: "critico", cpu: 92, ram: 88, disco: 76 },
             { id: "04", estado: "normal", cpu: 31, ram: 48, disco: 22 },
             { id: "05", estado: "normal", cpu: 27, ram: 59, disco: 34 },
-            { id: "06", estado: "atencao", cpu: 71, ram: 66, disco: 49 }
+            { id: "06", estado: "atencao", cpu: 71, ram: 66, disco: 49 },
         ];
 
         function exibirMaquinas() {

@@ -2,119 +2,203 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Tempo Real</title>
+    <title>SPOT | Painel de Monitorização</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
 
-    <script src="../js/sessao.js"></script>
-    <script src="../js/alerta.js"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+    <script src="../js/sessao.js" defer></script>
+    <script src="../js/alerta.js" defer></script>
 </head>
 
-<body onload="validarSessao(), exibirAquarios(),  atualizacaoPeriodica()">
+<body onload="exibirMaquinas()">
+    <div class="layout-aplicacao">
 
-    <div class="janela">
-
-        <div class="header-left dash-header">
-
-            <h1>AquaTech</h1>
-
-            <div class="hello">
-                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+        <aside class="barra-lateral">
+            <div class="area-marca">
+                <img src="../assets/icon/logo-azul.png" alt="Logo SPOT" class="imagem-logo">
             </div>
 
-            <div class="btn-nav">
-                <h3>Aquários e Terrários</h3>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
+            <nav class="menu-lateral">
+                <a href="#" class="item-menu">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Configurações</span>
                 </a>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
+                <a href="#" class="item-menu">
+                    <i class="fa-solid fa-server"></i>
+                    <span>Cadastrar Nova Máquina</span>
                 </a>
-            </div>
+            </nav>
 
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
+            <div class="rodape-lateral">
+                <div class="linha-rodape"></div>
+                <p>Mais controle,<br>menos riscos.</p>
             </div>
+        </aside>
 
-        </div>
+        <main class="conteudo-principal">
 
-        <div class="dash">
-            <div id="alerta">
-            </div>
-            <div class="area-parametros-alerta">
-                <p class="titulo-legenda">
-                    Legenda - Parâmetros para Alertas
-                </p>
-                <div class="parametros-alerta">
-                    <div class="item-regua perigo-frio">
-                        <p>Perigo</p>
-                        <p>&lt;=5°C</p>
+            <header class="cabecalho-superior">
+                <nav class="navegacao-cabecalho">
+                    <a href="#" class="aba-navegacao activa">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Início</span>
+                    </a>
+                </nav>
+
+                <div class="perfil-usuario">
+                    <div class="avatar-usuario">
+                        <i class="fa-solid fa-user"></i>
                     </div>
-                    <div class="item-regua alerta-frio">
-                        <p>Alerta</p>
-                        <p>&lt;=10°C</p>
-                    </div>
-                    <div class="item-regua ideal">
-                        <p>Ideal</p>
-                        <p>20°C</p>
-                    </div>
-                    <div class="item-regua alerta-quente">
-                        <p>Alerta</p>
-                        <p>&gt;=22°C</p>
-                    </div>
-                    <div class="item-regua perigo-quente">
-                        <p>Perigo</p>
-                        <p>&gt;=23°C</p>
-                    </div>
+                    <span class="nome-usuario">Olá, <strong id="b_usuario">Nicolas</strong></span>
+                    <i class="fa-solid fa-chevron-down icone-dropdown"></i>
                 </div>
+            </header>
+
+            <div class="corpo-painel">
+
+                <section class="seccao-boas-vindas">
+                    <div class="texto-boas-vindas">
+                        <div class="linha-destaque"></div>
+                        <h2>Bem-vindo de volta, <span class="destaque-usuario">Nicolas</span></h2>
+                    </div>
+
+                    <div class="ultima-atualizacao">
+                        <i class="fa-regular fa-clock"></i>
+                        <div class="info-atualizacao">
+                            <span>Última atualização</span>
+                            <strong id="data-atualizacao">26/09/2025 14:32</strong>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="grelha-indicadores">
+                    <div class="cartao-indicador">
+                        <div class="conteudo-indicador">
+                            <span class="numero-indicador" id="indicador-total">0</span>
+                            <span class="rotulo-indicador">MÁQUINAS MONITORADAS</span>
+                        </div>
+                        <span class="ponto-estado ponto-azul"></span>
+                    </div>
+
+                    <div class="cartao-indicador">
+                        <div class="conteudo-indicador">
+                            <span class="numero-indicador" id="indicador-normal">0</span>
+                            <span class="rotulo-indicador">A OPERAR NORMALMENTE</span>
+                        </div>
+                        <span class="ponto-estado ponto-verde"></span>
+                    </div>
+
+                    <div class="cartao-indicador">
+                        <div class="conteudo-indicador">
+                            <span class="numero-indicador" id="indicador-atencao">0</span>
+                            <span class="rotulo-indicador">EM ESTADO DE ATENÇÃO</span>
+                        </div>
+                        <span class="ponto-estado ponto-amarelo"></span>
+                    </div>
+
+                    <div class="cartao-indicador">
+                        <div class="conteudo-indicador">
+                            <span class="numero-indicador" id="indicador-critico">0</span>
+                            <span class="rotulo-indicador">REQUER AÇÃO IMEDIATA</span>
+                        </div>
+                        <span class="ponto-estado ponto-vermelho"></span>
+                    </div>
+                </section>
+
+                <section class="seccao-computadores">
+                    <div class="titulo-seccao">
+                        <div class="linha-destaque"></div>
+                        <h3>Computadores:</h3>
+                    </div>
+
+                    <div class="grelha-cartoes" id="grelha-maquinas"></div>
+                </section>
+
             </div>
-
-            <div class="cards" id="cardAquarios">
-
-            </div>
-
-        </div>
-
+        </main>
     </div>
 
+    <script>
+        const listaMaquinas = [
+            { id: "01", estado: "normal", cpu: 24, ram: 62, disco: 18 },
+            { id: "02", estado: "atencao", cpu: 68, ram: 73, disco: 41 },
+            { id: "03", estado: "critico", cpu: 92, ram: 88, disco: 76 },
+            { id: "04", estado: "normal", cpu: 31, ram: 48, disco: 22 },
+            { id: "05", estado: "normal", cpu: 27, ram: 59, disco: 34 },
+            { id: "06", estado: "atencao", cpu: 71, ram: 66, disco: 49 }
+        ];
+
+        function exibirMaquinas() {
+            const container = document.getElementById("grelha-maquinas");
+            container.innerHTML = "";
+
+            let totalNormal = 0, totalAtencao = 0, totalCritico = 0;
+
+            const configuracaoEtiqueta = {
+                normal: { classe: "etiqueta-normal", texto: "Normal" },
+                atencao: { classe: "etiqueta-atencao", texto: "Atenção" },
+                critico: { classe: "etiqueta-critica", texto: "Crítico" }
+            };
+
+            listaMaquinas.forEach(item => {
+                if (item.estado === "normal") totalNormal++;
+                if (item.estado === "atencao") totalAtencao++;
+                if (item.estado === "critico") totalCritico++;
+
+                const config = configuracaoEtiqueta[item.estado] || configuracaoEtiqueta.normal;
+
+                container.innerHTML += `
+                    <div class="cartao-maquina">
+                        <div class="cabecalho-cartao">
+                            <div class="info-maquina">
+                                <i class="fa-solid fa-server icone-maquina"></i>
+                                <h4>ID da máquina-${item.id}</h4>
+                            </div>
+                            <span class="etiqueta-estado ${config.classe}">
+                                <span class="ponto-etiqueta"></span> ${config.texto}
+                            </span>
+                        </div>
+                        <div class="lista-metricas">
+                            <div class="linha-metrica">
+                                <span class="rotulo-metrica">CPU</span>
+                                <div class="fundo-barra-progresso">
+                                    <div class="preenchimento-barra-progresso" style="width: ${item.cpu}%;"></div>
+                                </div>
+                                <span class="valor-metrica">${item.cpu}%</span>
+                            </div>
+                            <div class="linha-metrica">
+                                <span class="rotulo-metrica">RAM</span>
+                                <div class="fundo-barra-progresso">
+                                    <div class="preenchimento-barra-progresso" style="width: ${item.ram}%;"></div>
+                                </div>
+                                <span class="valor-metrica">${item.ram}%</span>
+                            </div>
+                            <div class="linha-metrica">
+                                <span class="rotulo-metrica">Disco</span>
+                                <div class="fundo-barra-progresso">
+                                    <div class="preenchimento-barra-progresso" style="width: ${item.disco}%;"></div>
+                                </div>
+                                <span class="valor-metrica">${item.disco}%</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById("indicador-total").innerText = listaMaquinas.length;
+            document.getElementById("indicador-normal").innerText = totalNormal;
+            document.getElementById("indicador-atencao").innerText = totalAtencao;
+            document.getElementById("indicador-critico").innerText = totalCritico;
+        }
+    </script>
 </body>
-
-<script>
-
-    function exibirAquarios() {
-        JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-            document.getElementById("cardAquarios").innerHTML += `
-                    <div class="card-aquario">
-                        <div class="title-aquario">
-                            <h1>${item.descricao}</h1>
-                        </div>
-                        <div class="desc-aquario">
-                        <div class="temperatura">
-                            <p id="temp_aquario_${item.id}">-°C</p>
-                        </div>
-                        <div class="cor-alerta" id="card_${item.id}"></div>
-                    </div>
-                    </div>
-                    `
-        });
-    }
-
-</script>
 
 </html>

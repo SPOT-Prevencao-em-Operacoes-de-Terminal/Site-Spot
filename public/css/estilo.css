@@ -261,13 +261,14 @@ body {
   line-height: 1.5;
 }
 .monitoramento {
-  background-color: #003b73;
+  background-color: rgba(8, 61, 99);
   padding: 80px 0 100px;
   color: white;
 }
 
 .monitoramento .container {
-  width: 80%;
+  width: 80%; 
+  height: 800px;
   margin: auto;
   display: block;
 }
@@ -293,6 +294,7 @@ body {
 }
 
 .categorias {
+  background-color: rgba(0, 0, 255, 0);
   display: flex;
   gap: 12px;
   margin-bottom: 24px;
@@ -317,40 +319,62 @@ body {
 }
 
 .cards-monitoramento {
+  height: 570px;
+  width: 1526px;
+  background-color: rgba(255, 166, 0, 0.028);
   display: flex;
   gap: 24px;
   overflow: hidden;
 }
 
 .card-monitoramento {
+  margin-left: 10px;
   min-width: 260px;
   width: 25%;
-  background-color: white;
+  background-color: rgb(39, 96, 139);
   border-radius: 10px;
   overflow: hidden;
   color: #003b73;
+  border-top: 2px solid rgba(70, 201, 230, 0.971);
+  border-bottom: 2px solid rgba(53, 204, 238, 0.971);
+  transition: 
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
+.card-monitoramento:hover {
+    transform: scale(1.02);
+
+    box-shadow:
+        0 0 10px rgba(31, 44, 156, 0.845),
+        0 0 25px rgba(50, 212, 234, 0.781),
+        0 12px 30px rgba(39, 218, 242, 0.857);
+}
+
+
 .card-imagem {
-  height: 190px;
+  width: 95%;
+  margin-left: 2.3%;
+  height: 400px;
+  border-radius: 20px;
   background-size: cover;
   background-position: center;
 }
 
 .card-imagem.cpu {
-  background-image: url('https://t.ctcdn.com.br/WviB4QUJLjvm9PP2rpAcDBr38qs=/1200x675/smart/i374827.jpeg');
+  background-image:url(/public/assets/imgs/cpuImagem.jpg);
 }
 
 .card-imagem.memoria {
-  background-image: url('https://t2.tudocdn.net/701103?w=1920');
+  background-image: url(/public/assets/imgs/memoriaRam.jpg);
 }
 
 .card-imagem.disco {
-  background-image: url('https://www.infoescola.com/wp-content/uploads/2011/01/disco-rigido.jpg');
+  background-image: url(/public/assets/imgs/disco.jpg);
 }
 
 .card-imagem.rede {
-  background-image: url('https://femackeinformatica.com.br/wp-content/uploads/2015/11/Redes-e-Internet-470x313.jpg');
+  background-image: url(/public/assets/imgs/rede.jpg);
 }
 
 .card-conteudo {
@@ -359,13 +383,14 @@ body {
 
 .card-conteudo h3 {
   margin: 0 0 15px;
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 27px;
+  font-weight: 600;
+  color: white;
 }
 
 .card-conteudo p {
   margin: 0;
-  color: #555;
+  color: #d5d3d3;
   font-size: 15px;
   line-height: 1.5;
 }

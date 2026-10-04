@@ -17,11 +17,12 @@
 </head>
 
 <body class="pagina-sobre">
-    <div class="header">
+  <div class="header">
     <div class="container">
 
       <h1 class="titulo">
-        <img src="assets/icon/logo-azul.png" alt="SPOT - Sistema de Prevenção Operacional de Terminais" class="logo-site">
+        <img src="assets/icon/logo-azul.png" alt="SPOT - Sistema de Prevenção Operacional de Terminais"
+          class="logo-site">
       </h1>
 
       <ul class="navbar">
@@ -35,7 +36,7 @@
         </li>
 
         <li>
-            <a href="como-funciona.html"><b>Como funciona</b></a>
+          <a href="como-funciona.html"><b>Como funciona</b></a>
         </li>
 
         <li class="separador">|</li>
@@ -52,117 +53,103 @@
 
     </div>
   </div>
-    <section class="sobre">
+  <section class="sobre">
 
-        <div class="conteudo-sobre">
-            <div class="imagem-sobre">
-                <img src="assets/imgs/porto.png">
-            </div>
-            <div class="texto-sobre">
-                <h2>
-                    Quem somos?
-                </h2>
-                <p>
-                    Somos uma empresa de tecnologia especializada em monitoramento de 
-                    infraestrutura para operações portuárias.Desenvolvemos soluções que
-                    ajudam empresas operadoras de terminais a acompanhar, em tempo real, o
-                    desempenho dos equipamentos responsáveis por sustentar seus sistemas 
-                    operacionais.
-                </p>
-            </div>
-        </div>
+    <div class="conteudo-sobre">
+      <div class="imagem-sobre">
+        <img src="assets/imgs/porto.png">
+      </div>
+      <div class="texto-sobre">
+        <h2>
+          Quem somos?
+        </h2>
+        <p>
+          Somos uma empresa de tecnologia especializada em monitoramento de
+          infraestrutura para operações portuárias.Desenvolvemos soluções que
+          ajudam empresas operadoras de terminais a acompanhar, em tempo real, o
+          desempenho dos equipamentos responsáveis por sustentar seus sistemas
+          operacionais.
+        </p>
+      </div>
+    </div>
 
-        <div class="texto-meio">
-            <h2>O que fazemos</h2>
-            <p>
-               Nossa solução monitora recursos como processador, memória, armazenamento e 
-               outros componentes de infraestrutura, identificando alterações que possam 
-               comprometer o funcionamento dos sistemas. A partir desses dados, o sistema
-               permite acompanhar o desempenho dos equipamentos e receber alertas quando 
-               determinados limites são ultrapassados.
-            </p>
-            <h2>Nosso propósito</h2>
-            <p>
-                Nosso propósito é antecipar problemas antes que eles se transformem em interrupções. 
-                Em uma operação portuária, uma falha inesperada na infraestrutura tecnológica pode 
-                gerar atrasos e impactar diversas etapas da operação. Por isso, buscamos transformar 
-                dados técnicos em informações que apoiem decisões rápidas e preventivas.
-            </p>
-        </div>
+    <div class="texto-meio">
+      <h2>O que fazemos</h2>
+      <p>
+        Nossa solução monitora recursos como processador, memória, armazenamento e
+        outros componentes de infraestrutura, identificando alterações que possam
+        comprometer o funcionamento dos sistemas. A partir desses dados, o sistema
+        permite acompanhar o desempenho dos equipamentos e receber alertas quando
+        determinados limites são ultrapassados.
+      </p>
+      <h2>Nosso propósito</h2>
+      <p>
+        Nosso propósito é antecipar problemas antes que eles se transformem em interrupções.
+        Em uma operação portuária, uma falha inesperada na infraestrutura tecnológica pode
+        gerar atrasos e impactar diversas etapas da operação. Por isso, buscamos transformar
+        dados técnicos em informações que apoiem decisões rápidas e preventivas.
+      </p>
+    </div>
 
-        <div class="conteudo-final">
-            <div class="texto-fim">
-                <h2>
-                    Monitorar é mais do que acompanhar. É estar um passo à frente da falha.
-                </h2>
-            </div>
+    <div class="conteudo-final">
+      <div class="texto-fim">
+        <h2>
+          Monitorar é mais do que acompanhar. É estar um passo à frente da falha.
+        </h2>
+      </div>
 
-            <div class="imagem-historia">
-                <img src="assets/imgs/tecnologia-porto.png">
-            </div>
-        </div>
-    </section>
+      <div class="imagem-historia">
+        <img src="assets/imgs/tecnologia-porto.png">
+      </div>
+    </div>
+  </section>
 
-    <footer class="footer">
+  <footer class="footer">
 
     <div class="footer-conteudo">
 
-        <div class="footer-info">
-            
-            <img src="assets/icon/logo-azul.png" 
-                  alt="SPOT - Sistema de Prevenção Operacional de Terminais"
-                  class="logo-footer">
+      <div class="footer-info">
 
-        </div>
+        <img src="assets/icon/logo-azul.png" alt="SPOT - Sistema de Prevenção Operacional de Terminais"
+          class="logo-footer">
+
+      </div>
 
 
-        <div id="footer-contato" class="footer-contato">
+      <div id="footer-contato" class="footer-contato">
 
-            <h2>Quer essa tecnologia para sua empresa?</h2>
+        <h2>Quer essa tecnologia para sua empresa?</h2>
 
-            <p>
-                Entre em contato conosco e descubra como a SPOT pode
-                ajudar sua empresa a monitorar sua infraestrutura e
-                antecipar possíveis falhas.
-            </p>
+        <p>
+          Entre em contato conosco e descubra como a SPOT pode
+          ajudar sua empresa a monitorar sua infraestrutura e
+          antecipar possíveis falhas.
+        </p>
 
-            <form class="form-contato">
+        <form class="form-contato" onsubmit="return cadastrarContato()">
 
-                <input 
-                    type="text" 
-                    placeholder="Nome"
-                    required
-                >
+          <input type="text" id="nome_input" placeholder="Nome" required>
 
-                <input 
-                    type="email" 
-                    placeholder="E-mail"
-                    required
-                >
+          <input type="email" id="email_input" placeholder="E-mail" required>
 
-                <input 
-                    type="tel" 
-                    placeholder="Telefone"
-                    required
-                >
+          <input type="tel" id="telefone_input" placeholder="Telefone" required>
 
-                <input 
-                    type="text" 
-                    placeholder="Empresa"
-                    required
-                >
+          <input type="text" id="empresa_input" placeholder="Empresa" required>
+          <button type="submit">
+            ENTRAR EM CONTATO
+          </button>
 
-                <button type="submit">
-                    ENTRAR EM CONTATO
-                </button>
+          <div class="card_erro" id="cardContato">
+            <span id="mensagem_contato"></span>
+          </div>
 
-            </form>
+        </form>
 
-        </div>
+      </div>
 
     </div>
 
-</footer>
+  </footer>
   <div class="footer-footer">
     <div class="footer-container">
       <div class="espaco-lateral">
@@ -218,4 +205,70 @@
     </div>
     <hr class="linha-footer">
   </div>
+
+  <script>
+    function cadastrarContato() {
+
+      var nomeVar = nome_input.value;
+      var emailVar = email_input.value;
+      var telefoneVar = telefone_input.value;
+      var empresaVar = empresa_input.value;
+
+      var cardContato = document.getElementById("cardContato");
+      var mensagemContato = document.getElementById("mensagem_contato");
+
+      cardContato.classList.remove("card_sucesso");
+      cardContato.style.display = "none";
+
+      console.log("NOME: ", nomeVar);
+      console.log("EMAIL: ", emailVar);
+      console.log("TELEFONE: ", telefoneVar);
+      console.log("EMPRESA: ", empresaVar);
+
+      fetch("/contatos/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          nomeServer: nomeVar,
+          emailServer: emailVar,
+          telefoneServer: telefoneVar,
+          nomeEmpresaServer: empresaVar
+        })
+      })
+        .then(function (resposta) {
+
+          if (resposta.ok) {
+
+            console.log("Contato cadastrado com sucesso!");
+
+            cardContato.classList.add("card_sucesso");
+            cardContato.style.display = "block";
+
+            mensagemContato.innerHTML =
+              "Registro concluído! A SPOT entrará em contato em breve para mais informações.";
+
+            document.querySelector(".form-contato").reset();
+          } else {
+
+            console.log("Houve um erro ao cadastrar o contato!");
+
+            cardContato.style.display = "block";
+            mensagemContato.innerHTML =
+              "Não foi possível enviar seus dados. Tente novamente.";
+          }
+        })
+        .catch(function (erro) {
+
+          console.log("Erro ao realizar o cadastro:", erro);
+
+          cardContato.style.display = "block";
+          mensagemContato.innerHTML =
+            "Ocorreu um erro ao enviar seus dados. Tente novamente.";
+        });
+
+      return false;
+    }
+  </script>
 </body>

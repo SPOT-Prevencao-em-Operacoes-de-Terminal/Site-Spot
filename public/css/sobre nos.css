@@ -401,3 +401,35 @@ body {
   width: 65%;
   padding-bottom: 1%;
 }
+
+.card_erro {
+    display: none;
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #ffe5e5;
+    border: 1px solid #ff4d4d;
+    border-radius: 6px;
+    color: #b30000;
+    text-align: center;
+    font-size: 15px;
+}
+
+.card_sucesso {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #e5f8eb;
+    border: 1px solid #42b866;
+    border-radius: 6px;
+    color: #237a3b;
+    text-align: center;
+    font-size: 15px;
+}
+
+#mensagem_contato {
+    display: block;
+}

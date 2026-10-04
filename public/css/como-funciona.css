@@ -497,3 +497,33 @@ body {
   width: 65%;
   padding-bottom: 1%;
 }
+
+#cardContato {
+    display: none;
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 15px;
+}
+
+#cardContato.sucesso {
+    display: block !important;
+    background-color: #e5f8eb !important;
+    border: 1px solid #42b866 !important;
+    color: #237a3b !important;
+}
+
+#cardContato.erro {
+    display: block !important;
+    background-color: #ffe5e5 !important;
+    border: 1px solid #ff4d4d !important;
+    color: #b30000 !important;
+}
+
+#mensagem_contato {
+    display: block;
+    color: inherit;
+}

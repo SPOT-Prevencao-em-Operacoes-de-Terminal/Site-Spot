@@ -285,6 +285,14 @@ body {
     border: 1px solid var(--cor-borda);
     border-radius: 8px;
     padding: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.cartao-maquina:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: var(--azul-destaque);
 }
 
 .cartao-maquina .cabecalho-cartao {

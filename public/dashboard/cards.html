@@ -138,6 +138,12 @@
             sessionStorage.clear();
         }
 
+
+        function navegarParaDashboard(idMaquina) {
+            sessionStorage.ID_MAQUINA = idMaquina;
+            window.location.href = "./dashboard.html";
+        }
+
         const listaMaquinas = [
             { id: "01", estado: "normal", cpu: 24, ram: 62, disco: 18 },
             { id: "02", estado: "atencao", cpu: 68, ram: 73, disco: 41 },
@@ -167,7 +173,7 @@
                 const config = configuracaoEtiqueta[item.estado] || configuracaoEtiqueta.normal;
 
                 container.innerHTML += `
-                    <div class="cartao-maquina">
+                    <div class="cartao-maquina" onclick="navegarParaDashboard('${item.id}')">
                         <div class="cabecalho-cartao">
                             <div class="info-maquina">
                                 <i class="fa-solid fa-server icone-maquina"></i>

@@ -637,3 +637,133 @@ body {
     color: var(--texto-principal);
     margin-top: 4px;
 }
+
+.controles-grafico {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.filtros-grafico {
+    display: flex;
+    gap: 4px;
+    background-color: #F1F5F9;
+    padding: 3px;
+    border-radius: 6px;
+}
+
+.btn-filtro {
+    border: none;
+    background: transparent;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--texto-suave);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-filtro:hover {
+    color: var(--azul-escuro);
+}
+
+.btn-filtro.ativo {
+    background-color: #FFFFFF;
+    color: var(--azul-destaque);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.btn-ver-todos {
+    border: none;
+    background: transparent;
+    color: var(--azul-destaque);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-ver-todos:hover {
+    text-decoration: underline;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(15, 23, 42, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.modal-overlay.ativo {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-container {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.modal-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.titulo-modal {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--azul-escuro);
+}
+
+.titulo-modal h3 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.btn-fechar-modal {
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: var(--texto-suave);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.btn-fechar-modal:hover {
+    color: var(--texto-principal);
+}
+
+.modal-corpo {
+    padding: 20px 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.badge-modal {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+}

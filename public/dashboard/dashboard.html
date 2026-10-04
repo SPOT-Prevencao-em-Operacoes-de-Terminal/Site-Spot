@@ -9,7 +9,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="./../css/dashboards.css">
@@ -33,7 +34,7 @@
                         <i class="fa-solid fa-chart-line"></i>
                         <span>Visão Geral</span>
                     </a>
-                    <a href="#secao-historico" class="item-menu">
+                    <a href="javascript:void(0)" class="item-menu" onclick="abrirModalHistorico()">
                         <i class="fa-solid fa-clock"></i>
                         <span>Histórico</span>
                     </a>
@@ -56,19 +57,18 @@
                     </a>
                 </nav>
 
-                <div class="perfil-usuario">
-                <div class="avatar-usuario">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <span class="nome-usuario">Olá, <strong id="b_usuario">Nicolas</strong></span>
+                <div class="perfil-usuario" onclick="alternarMenuUsuario(event)">
+                    <div class="avatar-usuario">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <span class="nome-usuario">Olá, <strong id="b_usuario">User</strong></span>
 
-                <div class="menu-dropdown-usuario" id="menu-dropdown-usuario">
-                    <a href="../login.html" class="item-dropdown-logout" onclick="limparSessao()">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                </a>
-                </a>
+                    <div class="menu-dropdown-usuario" id="menu-dropdown-usuario">
+                        <a href="../login.html" class="item-dropdown-logout" onclick="limparSessao()">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </a>
+                    </div>
                 </div>
-            </div>
             </header>
 
             <div class="corpo-painel">
@@ -79,7 +79,6 @@
 
                 <section class="secao-kpi-metricas">
 
-                    <!-- CPU -->
                     <div class="cartao-metrica">
                         <div class="topo-cartao-metrica">
                             <div class="info-titulo-metrica">
@@ -113,7 +112,6 @@
                         </div>
                     </div>
 
-                    <!-- RAM -->
                     <div class="cartao-metrica">
                         <div class="topo-cartao-metrica">
                             <div class="info-titulo-metrica">
@@ -147,7 +145,6 @@
                         </div>
                     </div>
 
-                    <!-- DISCO -->
                     <div class="cartao-metrica">
                         <div class="topo-cartao-metrica">
                             <div class="info-titulo-metrica">
@@ -181,7 +178,6 @@
                         </div>
                     </div>
 
-                    <!-- REDE -->
                     <div class="cartao-metrica">
                         <div class="topo-cartao-metrica">
                             <div class="info-titulo-metrica">
@@ -224,10 +220,20 @@
                                 <i class="fa-solid fa-chart-line"></i>
                                 <h3>Telemetria em Tempo Real</h3>
                             </div>
-                            <div class="legenda-grafico">
-                                <span><span class="ponto-legenda ponto-cpu"></span> CPU</span>
-                                <span><span class="ponto-legenda ponto-ram"></span> RAM</span>
-                                <span><span class="ponto-legenda ponto-disco"></span> Disco</span>
+                            <div class="controles-grafico">
+                                <div class="filtros-grafico">
+                                    <button class="btn-filtro ativo"
+                                        onclick="filtrarMetrica('todos', this)">Todos</button>
+                                    <button class="btn-filtro" onclick="filtrarMetrica('cpu', this)">CPU</button>
+                                    <button class="btn-filtro" onclick="filtrarMetrica('ram', this)">RAM</button>
+                                    <button class="btn-filtro" onclick="filtrarMetrica('disco', this)">Disco</button>
+                                </div>
+                                <div class="legenda-grafico">
+                                    <span id="legenda-cpu"><span class="ponto-legenda ponto-cpu"></span> CPU</span>
+                                    <span id="legenda-ram"><span class="ponto-legenda ponto-ram"></span> RAM</span>
+                                    <span id="legenda-disco"><span class="ponto-legenda ponto-disco"></span>
+                                        Disco</span>
+                                </div>
                             </div>
                         </div>
                         <div class="area-grafico">
@@ -239,54 +245,12 @@
                         <div class="cabecalho-painel-item">
                             <div class="titulo-painel-item">
                                 <i class="fa-regular fa-bell"></i>
-                                <h3>Alertas e Incidentes</h3>
+                                <h3>Alertas</h3>
                             </div>
+                            <button class="btn-ver-todos" onclick="abrirModalHistorico()">Ver todos</button>
                         </div>
-                        <div class="lista-alertas-historico" id="lista-alertas">
-                            <div class="item-alerta-historico">
-                                <div class="conteudo-alerta-item">
-                                    <span class="ponto-estado-alerta alerta-critico"></span>
-                                    <div>
-                                        <p class="mensagem-alerta">Uso de disco em 88%</p>
-                                        <span class="tempo-alerta">Há 10 min</span>
-                                    </div>
-                                </div>
-                                <i class="fa-solid fa-chevron-right icone-seta-alerta"></i>
-                            </div>
 
-                            <div class="item-alerta-historico">
-                                <div class="conteudo-alerta-item">
-                                    <span class="ponto-estado-alerta alerta-atencao"></span>
-                                    <div>
-                                        <p class="mensagem-alerta">Uso de rede elevado</p>
-                                        <span class="tempo-alerta">Há 20 min</span>
-                                    </div>
-                                </div>
-                                <i class="fa-solid fa-chevron-right icone-seta-alerta"></i>
-                            </div>
-
-                            <div class="item-alerta-historico">
-                                <div class="conteudo-alerta-item">
-                                    <span class="ponto-estado-alerta alerta-atencao"></span>
-                                    <div>
-                                        <p class="mensagem-alerta">Uso de CPU em 75%</p>
-                                        <span class="tempo-alerta">Há 35 min</span>
-                                    </div>
-                                </div>
-                                <i class="fa-solid fa-chevron-right icone-seta-alerta"></i>
-                            </div>
-
-                            <div class="item-alerta-historico">
-                                <div class="conteudo-alerta-item">
-                                    <span class="ponto-estado-alerta alerta-normal"></span>
-                                    <div>
-                                        <p class="mensagem-alerta">Sistema a operar normalmente</p>
-                                        <span class="tempo-alerta">Há 50 min</span>
-                                    </div>
-                                </div>
-                                <i class="fa-solid fa-chevron-right icone-seta-alerta"></i>
-                            </div>
-                        </div>
+                        <div class="lista-alertas-historico" id="lista-alertas"></div>
                     </div>
                 </section>
 
@@ -294,14 +258,239 @@
         </main>
     </div>
 
+    <div class="modal-overlay" id="modal-historico">
+        <div class="modal-container">
+            <div class="modal-cabecalho">
+                <div class="titulo-modal">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <h3>Histórico Completo de Alertas</h3>
+                </div>
+                <button class="btn-fechar-modal" onclick="fecharModalHistorico()">&times;</button>
+            </div>
+            <div class="modal-corpo" id="conteudo-modal-alertas"></div>
+        </div>
+    </div>
+
     <script>
+        let meuGrafico = null;
+        let cpuAtual = 58;
+        let ramAtual = 62;
+        let discoAtual = 34;
+        let redeAtual = 12;
+
+        const listaAlertas = [
+            { mensagem: "Uso de disco acima de 88%", tempo: "Há 10 min", estado: "critico" },
+            { mensagem: "Latência de rede acima de 45ms", tempo: "Há 20 min", estado: "atencao" },
+            { mensagem: "Uso de CPU atingiu 75%", tempo: "Há 35 min", estado: "atencao" },
+            { mensagem: "Sistema operando normalmente", tempo: "Há 50 min", estado: "normal" }
+        ];
+
         function inicializarDashboard() {
             const idMaquina = sessionStorage.ID_MAQUINA || "01";
             document.getElementById("titulo-maquina").innerText = `Dashboard do Computador - Máquina ${idMaquina}`;
 
             renderizarGraficoTelemetria();
-            
-            atualizarTodasKPIs(58, 62, 88, 12);
+            atualizarTodasKPIs(cpuAtual, ramAtual, discoAtual, redeAtual);
+            renderizarAlertas();
+
+            setInterval(simularAtualizacaoTempoReal, 2500);
+        }
+
+        function renderizarAlertas() {
+            const elPainel = document.getElementById("lista-alertas");
+            const elModal = document.getElementById("conteudo-modal-alertas");
+
+            elPainel.innerHTML = "";
+            elModal.innerHTML = "";
+
+            const configEstado = {
+                critico: { classeModal: "etiqueta-critica", textoModal: "Crítico", classePonto: "alerta-critico" },
+                atencao: { classeModal: "etiqueta-atencao", textoModal: "Atenção", classePonto: "alerta-atencao" },
+                normal: { classeModal: "etiqueta-normal", textoModal: "Normal", classePonto: "alerta-normal" }
+            };
+
+            listaAlertas.forEach(alerta => {
+                const conf = configEstado[alerta.estado] || configEstado.normal;
+
+                elPainel.innerHTML += `
+                    <div class="item-alerta-historico" onclick="abrirModalHistorico()">
+                        <div class="conteudo-alerta-item">
+                            <span class="ponto-estado-alerta ${conf.classePonto}"></span>
+                            <div>
+                                <p class="mensagem-alerta">${alerta.mensagem}</p>
+                                <span class="tempo-alerta">${alerta.tempo}</span>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right icone-seta-alerta"></i>
+                    </div>
+                `;
+
+                elModal.innerHTML += `
+                    <div class="item-alerta-historico">
+                        <div class="conteudo-alerta-item">
+                            <span class="ponto-estado-alerta ${conf.classePonto}"></span>
+                            <div>
+                                <p class="mensagem-alerta">${alerta.mensagem}</p>
+                                <span class="tempo-alerta">${alerta.tempo}</span>
+                            </div>
+                        </div>
+                        <span class="badge-modal ${conf.classeModal}">${conf.textoModal}</span>
+                    </div>
+                `;
+            });
+        }
+
+        function renderizarGraficoTelemetria() {
+            const ctx = document.getElementById('graficoTelemetria').getContext('2d');
+            const rotulosHorario = ['14:00', '14:05', '14:10', '14:15', '14:20', '14:25', '14:30'];
+
+            meuGrafico = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: rotulosHorario,
+                    datasets: [
+                        {
+                            label: 'CPU',
+                            data: [50, 52, 58, 59, 55, 58, cpuAtual],
+                            borderColor: '#3B82F6',
+                            backgroundColor: 'transparent',
+                            tension: 0.3,
+                            borderWidth: 2,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'RAM',
+                            data: [68, 70, 72, 73, 76, 74, ramAtual],
+                            borderColor: '#8B5CF6',
+                            backgroundColor: 'transparent',
+                            tension: 0.3,
+                            borderWidth: 2,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'Disco',
+                            data: [25, 30, 26, 35, 25, 32, discoAtual],
+                            borderColor: '#10B981',
+                            backgroundColor: 'transparent',
+                            tension: 0.3,
+                            borderWidth: 2,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 100,
+                            ticks: {
+                                callback: value => value + '%',
+                                stepSize: 25,
+                                color: '#94A3B8'
+                            },
+                            grid: { color: '#F1F5F9' }
+                        },
+                        x: {
+                            ticks: { color: '#94A3B8' },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        function filtrarMetrica(tipo, elementoBotao) {
+            document.querySelectorAll('.btn-filtro').forEach(btn => btn.classList.remove('ativo'));
+            elementoBotao.classList.add('ativo');
+
+            const legendaCpu = document.getElementById('legenda-cpu');
+            const legendaRam = document.getElementById('legenda-ram');
+            const legendaDisco = document.getElementById('legenda-disco');
+
+            if (tipo === 'todos') {
+                meuGrafico.setDatasetVisibility(0, true);
+                meuGrafico.setDatasetVisibility(1, true);
+                meuGrafico.setDatasetVisibility(2, true);
+
+                legendaCpu.style.display = 'inline-block';
+                legendaRam.style.display = 'inline-block';
+                legendaDisco.style.display = 'inline-block';
+            } else if (tipo === 'cpu') {
+                meuGrafico.setDatasetVisibility(0, true);
+                meuGrafico.setDatasetVisibility(1, false);
+                meuGrafico.setDatasetVisibility(2, false);
+
+                legendaCpu.style.display = 'inline-block';
+                legendaRam.style.display = 'none';
+                legendaDisco.style.display = 'none';
+            } else if (tipo === 'ram') {
+                meuGrafico.setDatasetVisibility(0, false);
+                meuGrafico.setDatasetVisibility(1, true);
+                meuGrafico.setDatasetVisibility(2, false);
+
+                legendaCpu.style.display = 'none';
+                legendaRam.style.display = 'inline-block';
+                legendaDisco.style.display = 'none';
+            } else if (tipo === 'disco') {
+                meuGrafico.setDatasetVisibility(0, false);
+                meuGrafico.setDatasetVisibility(1, false);
+                meuGrafico.setDatasetVisibility(2, true);
+
+                legendaCpu.style.display = 'none';
+                legendaRam.style.display = 'none';
+                legendaDisco.style.display = 'inline-block';
+            }
+
+            meuGrafico.update();
+        }
+
+        function simularAtualizacaoTempoReal() {
+            cpuAtual = Math.min(100, Math.max(10, Math.round(cpuAtual + (Math.random() * 12 - 6))));
+            ramAtual = Math.min(100, Math.max(20, Math.round(ramAtual + (Math.random() * 6 - 3))));
+            discoAtual = Math.min(100, Math.max(10, Math.round(discoAtual + (Math.random() * 2 - 1))));
+            redeAtual = Math.min(150, Math.max(5, Math.round(redeAtual + (Math.random() * 10 - 5))));
+
+            atualizarTodasKPIs(cpuAtual, ramAtual, discoAtual, redeAtual);
+
+            if (cpuAtual > 70) {
+                adicionarNovoAlerta(`Uso crítico de CPU: ${cpuAtual}%`, "critico");
+            } else if (ramAtual > 80) {
+                adicionarNovoAlerta(`Uso elevado de RAM: ${ramAtual}%`, "atencao");
+            }
+
+            const agora = new Date();
+            const horas = String(agora.getHours()).padStart(2, '0');
+            const minutos = String(agora.getMinutes()).padStart(2, '0');
+            const segundos = String(agora.getSeconds()).padStart(2, '0');
+            const horarioFormatado = `${horas}:${minutos}:${segundos}`;
+
+            meuGrafico.data.labels.shift();
+            meuGrafico.data.labels.push(horarioFormatado);
+
+            meuGrafico.data.datasets[0].data.shift();
+            meuGrafico.data.datasets[0].data.push(cpuAtual);
+
+            meuGrafico.data.datasets[1].data.shift();
+            meuGrafico.data.datasets[1].data.push(ramAtual);
+
+            meuGrafico.data.datasets[2].data.shift();
+            meuGrafico.data.datasets[2].data.push(discoAtual);
+
+            meuGrafico.update();
+        }
+
+        function adicionarNovoAlerta(mensagem, estado) {
+            const jaExiste = listaAlertas.some(a => a.mensagem === mensagem);
+            if (!jaExiste) {
+                listaAlertas.unshift({ mensagem, tempo: "Agora mesmo", estado });
+                if (listaAlertas.length > 8) listaAlertas.pop();
+                renderizarAlertas();
+            }
         }
 
         function calcularStatus(valor, limiteAtencao, limiteCritico) {
@@ -338,70 +527,6 @@
             atualizarKPI('rede', rede, ' ms', 20, 50);
         }
 
-        function renderizarGraficoTelemetria() {
-            const ctx = document.getElementById('graficoTelemetria').getContext('2d');
-            const rotulosHorario = ['14:00', '14:05', '14:10', '14:15', '14:20', '14:25', '14:30'];
-
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: rotulosHorario,
-                    datasets: [
-                        {
-                            label: 'CPU',
-                            data: [50, 52, 58, 59, 55, 58, 60],
-                            borderColor: '#3B82F6',
-                            backgroundColor: 'transparent',
-                            tension: 0,
-                            borderWidth: 2,
-                            pointRadius: 0
-                        },
-                        {
-                            label: 'RAM',
-                            data: [68, 70, 72, 73, 76, 74, 78],
-                            borderColor: '#8B5CF6',
-                            backgroundColor: 'transparent',
-                            tension: 0.4,
-                            borderWidth: 2,
-                            pointRadius: 0
-                        },
-                        {
-                            label: 'Disco',
-                            data: [25, 30, 26, 35, 25, 32, 34],
-                            borderColor: '#10B981',
-                            backgroundColor: 'transparent',
-                            tension: 0.4,
-                            borderWidth: 2,
-                            pointRadius: 0
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        y: {
-                            min: 0,
-                            max: 100,
-                            ticks: {
-                                callback: value => value + '%',
-                                stepSize: 25,
-                                color: '#94A3B8'
-                            },
-                            grid: { color: '#F1F5F9' }
-                        },
-                        x: {
-                            ticks: { color: '#94A3B8' },
-                            grid: { display: false }
-                        }
-                    }
-                }
-            });
-        }
-
         function alternarMenuUsuario(event) {
             event.stopPropagation();
             const menu = document.getElementById("menu-dropdown-usuario");
@@ -412,6 +537,21 @@
             const menu = document.getElementById("menu-dropdown-usuario");
             if (menu && menu.classList.contains("ativo")) {
                 menu.classList.remove("ativo");
+            }
+        });
+
+        function abrirModalHistorico() {
+            document.getElementById('modal-historico').classList.add('ativo');
+        }
+
+        function fecharModalHistorico() {
+            document.getElementById('modal-historico').classList.remove('ativo');
+        }
+
+        window.addEventListener('click', function (event) {
+            const modal = document.getElementById('modal-historico');
+            if (event.target === modal) {
+                fecharModalHistorico();
             }
         });
     </script>

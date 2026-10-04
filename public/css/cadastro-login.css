@@ -106,7 +106,8 @@ body {
     margin-top: 10%;
 }
 
-.form-contato input {
+.form-contato input,
+.form-contato select {
     width: 100%;
     padding: 14px 16px;
     border: 1px solid #ddd;
@@ -118,7 +119,28 @@ body {
     transition: 0.3s;
 }
 
-.form-contato input:focus {
+.form-contato select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 40px;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23555555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 16px;
+    cursor: pointer;
+}
+
+.form-contato select:invalid {
+    color: #999;
+}
+
+.form-contato select option:not([value=""]) {
+    color: #000;
+}
+
+.form-contato input:focus,
+.form-contato select:focus {
     border-color: #052844;
 }
 
@@ -219,4 +241,70 @@ body {
   border-top: 1px solid #999;
   width: 65%;
   padding-bottom: 1%;
+}
+
+.alerta_erro {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.card_erro {
+    display: none;
+    width: 500px;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: #ffe5e5;
+    border: 1px solid #ff4d4d;
+    border-radius: 6px;
+    color: #b30000;
+    text-align: center;
+    font-size: 15px;
+}
+
+#mensagem_erro {
+    display: block;
+}
+
+.card_sucesso {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #e5f8eb;
+    border: 1px solid #42b866;
+    border-radius: 6px;
+    color: #237a3b;
+    text-align: center;
+    font-size: 15px;
+}
+
+#div_erros_login {
+    display: none;
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #ffe5e5;
+    border: 1px solid #ff4d4d;
+    border-radius: 6px;
+    color: #b30000;
+    text-align: center;
+    font-size: 15px;
+}
+
+#div_erros_login.conectando {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #e5f8eb;
+    border: 1px solid #42b866;
+    border-radius: 6px;
+    color: #237a3b;
+    text-align: center;
+    font-size: 15px;
 }

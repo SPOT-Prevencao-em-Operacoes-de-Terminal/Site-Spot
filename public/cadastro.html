@@ -8,7 +8,7 @@
 
   <title> SPOT | Cadastro</title>
 
- <script src="./js/sessao.js"></script>
+  <script src="./js/sessao.js"></script>
 
   <link rel="stylesheet" href="./css/cadastro-login.css">
   <link rel="icon" href="./assets/icon/favicon2.ico">
@@ -20,9 +20,9 @@
   <!--header inicio-->
   <div class="header">
     <div class="container-logo">
-     <h1 class="titulo">
-      <a href="index.html">
-            <img src="assets/icon/logo-azul.png" alt="logo" class="logo-site">
+      <h1 class="titulo">
+        <a href="index.html">
+          <img src="assets/icon/logo-azul.png" alt="logo" class="logo-site">
         </a>
       </h1>
     </div>
@@ -30,133 +30,118 @@
   <!--header fim-->
 
   <div class="login">
-    <div class="alerta_erro">
-      <div class="card_erro" id="cardErro">
-        <span id="mensagem_erro"></span>
-      </div>
-    </div>
+    
     <div class="container">
       <div class="card card-cadastro">
         <div class="form-contato">
 
-                      <h2>Bem-vindo ao seu Cadastro SPOT</h2>
+          <h2>Bem-vindo ao seu Cadastro SPOT</h2>
 
-            <p>
-                Entre em contato conosco e descubra como a SPOT pode
-                ajudar sua empresa a monitorar sua infraestrutura e
-                antecipar possíveis falhas.
-            </p>
+          <p>
 
-            <form class="form-contato">
+            Junte-se à SPOT e transforme o monitoramento da sua infraestrutura
+             com inteligência e prevenção.
 
-                <input 
-                    type="text" 
-                    placeholder="Razão social"
-                    required
-                >
+          </p>
 
-                <input 
-                    type="text" 
-                    placeholder="Nome fantasia"
-                    required
-                >
+          <form class="form-contato" onsubmit="return cadastrar()">
 
-                <input 
-                    type="text" 
-                    placeholder="CNPJ"
-                    required
-                >
+            <input type="text" id="nome_input" placeholder="Nome" required>
 
-                <input 
-                    type="text" 
-                    placeholder="Nome do responsável"
-                    required
-                >
+            <select id="cargo_input" required>
 
-                <input 
-                    type="email" 
-                    placeholder="E-mail corporativo"
-                    required
-                >
-                <input 
-                    type="text" 
-                    placeholder="Telefone"
-                    required
-                >
+              <option value="" disabled selected hidden>Selecione o cargo</option>
+              <option value="Analista de TI">Analista de TI</option>
+              <option value="Gestor de TI">Gestor(a) de TI</option>
 
-                <button type="submit">
-                    CADASTRE-SE
-                </button>
+            </select>
 
-                <p class="form-texto-redirecionamento">
-                Se já faz parte de nossa rede e deseja cadastrar algum operador, clique no <a href="cadastro-user.html">link</a>.
-                Se deseja acessar o sistema, faça <a href="login.html">login</a>.
-            </p>
+            <input type="text" id="cpf_input" placeholder="CPF" maxlength="11" required inputmode="numeric">
 
-            </form>
+            <input type="email" id="email_input" placeholder="E-mail" required>
 
-        <div id="div_erros_login"></div>
+            <input type="text" id="codigo_input" placeholder="Código da Empresa" required>
+
+            <input type="password" id="senha_input" placeholder="Senha" required>
+
+            <input type="password" id="confirmacao_senha_input" placeholder="Confirmar Senha" required>
+
+            <button type="submit">CADASTRE-SE</button>
+
+            <div class="alerta_erro">
+      <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
       </div>
     </div>
-  </div>
-  <!-- FOOTER -->
-  </footer>
 
-  <div class="footer-footer">
-    <div class="footer-container">
-      <div class="espaco-lateral">
-      </div>
-      <div class="boxes">
-        <h2 class="footer-titulo">Principal</h2>
-        <div class="footer-menu">
-          <ul>
-            <li id="menu1">
-              <a href="#">Inicial</a>
-            </li>
-            <li>
-              <a href="sobre nos.html">Sobre Nós</a>
-            </li>
-            <li>
-              <a href="#footer-contato">Contato</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="boxes">
-        <h2 class="footer-titulo">Páginas</h2>
-        <div class="footer-menu">
-          <ul>
-            <li>
-              <a href="como-funciona.html">Como Funciona</a>
-            </li>
-            <li>
-              <a href="cadastro.html">Cadastro</a>
-            </li>
-            <li>
-              <a href="login.html">Login</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="boxes">
-        <h2 class="footer-titulo">Categorias</h2>
-        <div class="footer-menu">
-          <ul>
-            <li>
-              <a href="como-funciona.html#titulo-conteudo-passo-a-passo">Funcionalidade da aplicação</a>
-            </li>
-            <li>
-              <a href="#social">Monitoramento inteligente</a>
-            </li>
-            <li>
-              <a href="#monitoramento">Partes monitoradas</a>
-            </li>
-          </ul>
+          <p class="form-texto-redirecionamento">
+            Já possui uma conta? Acesse <a href="login.html">login</a>.
+          </p>
+
+          </form>
+
+          <div id="div_erros_login"></div>
         </div>
       </div>
     </div>
-    <hr class="linha-footer">
-  </div>
+    <!-- FOOTER -->
+    </footer>
+
+    <div class="footer-footer">
+      <div class="footer-container">
+        <div class="espaco-lateral">
+        </div>
+        <div class="boxes">
+          <h2 class="footer-titulo">Principal</h2>
+          <div class="footer-menu">
+            <ul>
+              <li id="menu1">
+                <a href="#">Inicial</a>
+              </li>
+              <li>
+                <a href="sobre nos.html">Sobre Nós</a>
+              </li>
+              <li>
+                <a href="#footer-contato">Contato</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="boxes">
+          <h2 class="footer-titulo">Páginas</h2>
+          <div class="footer-menu">
+            <ul>
+              <li>
+                <a href="como-funciona.html">Como Funciona</a>
+              </li>
+              <li>
+                <a href="cadastro.html">Cadastro</a>
+              </li>
+              <li>
+                <a href="login.html">Login</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="boxes">
+          <h2 class="footer-titulo">Categorias</h2>
+          <div class="footer-menu">
+            <ul>
+              <li>
+                <a href="como-funciona.html#titulo-conteudo-passo-a-passo">Funcionalidade da aplicação</a>
+              </li>
+              <li>
+                <a href="#social">Monitoramento inteligente</a>
+              </li>
+              <li>
+                <a href="#monitoramento">Partes monitoradas</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr class="linha-footer">
+    </div>
 
 </body>
 
@@ -174,6 +159,8 @@
     // Agora vá para o método fetch logo abaixo
     var nomeVar = nome_input.value;
     var emailVar = email_input.value;
+    var cargoVar = cargo_input.value;
+    var cpfVar = cpf_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
     var codigoVar = codigo_input.value;
@@ -183,6 +170,8 @@
     if (
       nomeVar == "" ||
       emailVar == "" ||
+      cargoVar == "" || 
+      cpfVar == "" ||
       senhaVar == "" ||
       confirmacaoSenhaVar == "" ||
       codigoVar == ""
@@ -197,18 +186,72 @@
       setInterval(sumirMensagem, 5000);
     }
 
+    if (cpfVar.length != 11 || isNaN(cpfVar)) {
+
+    cardErro.style.display = "block";
+
+    mensagem_erro.innerHTML =
+        "O CPF deve possuir 11 números.";
+
+    setTimeout(sumirMensagem, 5000);
+
+    return false;
+}
+
+    if (!emailVar.includes("@")) {
+      
+      cardErro.style.display = "block";
+      
+      mensagem_erro.innerHTML =
+        "Informe um e-mail válido.";
+        
+        setTimeout(sumirMensagem, 5000); return false; }
+
+    if (senhaVar.length < 8 ) {
+
+    cardErro.style.display = "block";
+
+    mensagem_erro.innerHTML =
+        "A senha deve possuir pelo menos 8 caracteres.";
+
+    setTimeout(sumirMensagem, 5000);
+
+    return false;
+}
+
+    if (senhaVar != confirmacaoSenhaVar) {
+      
+      cardErro.style.display = "block";
+      
+      mensagem_erro.innerHTML =
+        "As senhas não coincidem.";
+        
+        setTimeout(sumirMensagem, 5000); return false; }
+
     // Verificando se o código de ativação é de alguma empresa cadastrada
     for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-        idEmpresaVincular = listaEmpresasCadastradas[i].id
+
+    if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+
+        idEmpresaVincular = listaEmpresasCadastradas[i].id_empresa;
+
         console.log("Código de ativação válido.");
+
         break;
-      } else {
-        cardErro.style.display = "block";
-        mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
-        finalizarAguardar();
-      }
     }
+}
+
+if (idEmpresaVincular == undefined) {
+
+    cardErro.style.display = "block";
+
+    mensagem_erro.innerHTML =
+        "Código da empresa inválido.";
+
+    setTimeout(sumirMensagem, 5000);
+
+    return false;
+}
 
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
@@ -221,6 +264,8 @@
         // Agora vá para o arquivo routes/usuario.js
         nomeServer: nomeVar,
         emailServer: emailVar,
+        cargoServer: cargoVar,
+        cpfServer: cpfVar,
         senhaServer: senhaVar,
         idEmpresaVincularServer: idEmpresaVincular
       }),
@@ -229,10 +274,9 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErro.style.display = "block";
-
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+          cardErro.classList.add("card_sucesso");
+mensagem_erro.innerHTML =
+    "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
           setTimeout(() => {
             window.location = "login.html";

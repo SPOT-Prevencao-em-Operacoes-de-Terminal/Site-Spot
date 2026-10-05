@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPOT | Painel de Monitorização</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="./../css/dashboards.css">
+
+    <script src="../js/sessao.js" defer></script>
+    <script src="../js/alerta.js" defer></script>
+</head>
+
+<body onload="exibirMaquinas()">
+    <div class="layout-aplicacao">
+
+        <aside class="barra-lateral">
+            <div class="area-marca">
+                <img src="../assets/icon/logo-branca.png" alt="Logo SPOT" class="imagem-logo">
+            </div>
+
+            <nav class="menu-lateral">
+                <a href="#" class="item-menu">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Configurações</span>
+                </a>
+                
+                <a href="#" class="item-menu">
+                    <i class="fa-solid fa-server"></i>
+                    <span>Cadastrar Nova Máquina</span>
+                </a>
+            </nav>
+
+            <div class="rodape-lateral">
+                <div class="linha-rodape"></div>
+                <p>Mais controle,<br>menos riscos.</p>
+            </div>
+        </aside>
+
+        <main class="conteudo-principal">
+
+            <header class="cabecalho-superior">
+                <nav class="navegacao-cabecalho">
+                    <a href="#" class="aba-navegacao activa">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Início</span>
+                    </a>
+                </nav>
+
+                <div class="perfil-usuario">
+                <div class="avatar-usuario">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <span class="nome-usuario">Olá, <strong id="b_usuario">User</strong></span>
+
+                <div class="menu-dropdown-usuario" id="menu-dropdown-usuario">
+                    <a href="../login.html" class="item-dropdown-logout" onclick="limparSessao()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
+                </a>
+                </div>
+            </div>
+            </header>
+
+            <div class="corpo-painel">
+
+                <section class="seccao-boas-vindas">
+                    <div class="texto-boas-vindas">
+                        <div class="linha-destaque"></div>
+                        <h2>Bem-vindo de volta, <span class="destaque-usuario">User</span></h2>
+                    </div>
+
+                    <div class="ultima-atualizacao">
+                        <i class="fa-regular fa-clock"></i>
+                        <div class="info-atualizacao">
+                            <span>Última atualização</span>
+                            <strong id="data-atualizacao">26/09/2025 14:32</strong>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="grelha-indicadores">
+                    <div class="cartao-indicador">
+                        <div class="conteudo-indicador">
+                            <span class="numero-indicador" id="indicador-total">0</span>
+                            <span class="rotulo-indicador">MÁQUINAS MONITORADAS</span>
+                        </div>
+                        <span class="ponto-estado ponto-azul"></span>
+                    </div>
+
+                    <div class="cartao-indicador">
+                        <div class="conteudo-indicador">
+                            <span class="numero-indicador" id="indicador-normal">0</span>
+                            <span class="rotulo-indicador">A OPERAR NORMALMENTE</span>
+                        </div>
+                        <span class="ponto-estado ponto-verde"></span>
+                    </div>
+
+                    <div class="cartao-indicador">
+                        <div class="conteudo-indicador">
+                            <span class="numero-indicador" id="indicador-atencao">0</span>
+                            <span class="rotulo-indicador">EM ESTADO DE ATENÇÃO</span>
+                        </div>
+                        <span class="ponto-estado ponto-amarelo"></span>
+                    </div>
+
+                    <div class="cartao-indicador">
+                        <div class="conteudo-indicador">
+                            <span class="numero-indicador" id="indicador-critico">0</span>
+                            <span class="rotulo-indicador">REQUER AÇÃO IMEDIATA</span>
+                        </div>
+                        <span class="ponto-estado ponto-vermelho"></span>
+                    </div>
+                </section>
+
+                <section class="seccao-computadores">
+                    <div class="titulo-seccao">
+                        <div class="linha-destaque"></div>
+                        <h3>Computadores:</h3>
+                    </div>
+
+                    <div class="grelha-cartoes" id="grelha-maquinas"></div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+
+        function limparSessao() {
+            sessionStorage.clear();
+        }
+
+
+        function navegarParaDashboard(idMaquina) {
+            sessionStorage.ID_MAQUINA = idMaquina;
+            window.location.href = "./dashboard.html";
+        }
+
+        const listaMaquinas = [
+            { id: "01", estado: "normal", cpu: 24, ram: 62, disco: 18 },
+            { id: "02", estado: "atencao", cpu: 68, ram: 73, disco: 41 },
+            { id: "03", estado: "critico", cpu: 92, ram: 88, disco: 76 },
+            { id: "04", estado: "normal", cpu: 31, ram: 48, disco: 22 },
+            { id: "05", estado: "normal", cpu: 27, ram: 59, disco: 34 },
+            { id: "06", estado: "atencao", cpu: 71, ram: 66, disco: 49 },
+        ];
+
+        function exibirMaquinas() {
+            const container = document.getElementById("grelha-maquinas");
+            container.innerHTML = "";
+
+            let totalNormal = 0, totalAtencao = 0, totalCritico = 0;
+
+            const configuracaoEtiqueta = {
+                normal: { classe: "etiqueta-normal", texto: "Normal" },
+                atencao: { classe: "etiqueta-atencao", texto: "Atenção" },
+                critico: { classe: "etiqueta-critica", texto: "Crítico" }
+            };
+
+            listaMaquinas.forEach(item => {
+                if (item.estado === "normal") totalNormal++;
+                if (item.estado === "atencao") totalAtencao++;
+                if (item.estado === "critico") totalCritico++;
+
+                const config = configuracaoEtiqueta[item.estado] || configuracaoEtiqueta.normal;
+
+                container.innerHTML += `
+                    <div class="cartao-maquina" onclick="navegarParaDashboard('${item.id}')">
+                        <div class="cabecalho-cartao">
+                            <div class="info-maquina">
+                                <i class="fa-solid fa-server icone-maquina"></i>
+                                <h4>ID da máquina-${item.id}</h4>
+                            </div>
+                            <span class="etiqueta-estado ${config.classe}">
+                                <span class="ponto-etiqueta"></span> ${config.texto}
+                            </span>
+                        </div>
+                        <div class="lista-metricas">
+                            <div class="linha-metrica">
+                                <span class="rotulo-metrica">CPU</span>
+                                <div class="fundo-barra-progresso">
+                                    <div class="preenchimento-barra-progresso" style="width: ${item.cpu}%;"></div>
+                                </div>
+                                <span class="valor-metrica">${item.cpu}%</span>
+                            </div>
+                            <div class="linha-metrica">
+                                <span class="rotulo-metrica">RAM</span>
+                                <div class="fundo-barra-progresso">
+                                    <div class="preenchimento-barra-progresso" style="width: ${item.ram}%;"></div>
+                                </div>
+                                <span class="valor-metrica">${item.ram}%</span>
+                            </div>
+                            <div class="linha-metrica">
+                                <span class="rotulo-metrica">Disco</span>
+                                <div class="fundo-barra-progresso">
+                                    <div class="preenchimento-barra-progresso" style="width: ${item.disco}%;"></div>
+                                </div>
+                                <span class="valor-metrica">${item.disco}%</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById("indicador-total").innerText = listaMaquinas.length;
+            document.getElementById("indicador-normal").innerText = totalNormal;
+            document.getElementById("indicador-atencao").innerText = totalAtencao;
+            document.getElementById("indicador-critico").innerText = totalCritico;
+        }
+    </script>
+</body>
+
+</html>

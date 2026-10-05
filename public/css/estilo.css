@@ -362,19 +362,19 @@ body {
 }
 
 .card-imagem.cpu {
-  background-image:url(/public/assets/imgs/cpuImagem.jpg);
+  background-image:url(../assets/imgs/cpuImagem.jpg);
 }
 
 .card-imagem.memoria {
-  background-image: url(/public/assets/imgs/memoriaRam.jpg);
+  background-image: url(../assets/imgs/memoriaRam.jpg);
 }
 
 .card-imagem.disco {
-  background-image: url(/public/assets/imgs/disco.jpg);
+  background-image: url(../assets/imgs/disco.jpg);
 }
 
 .card-imagem.rede {
-  background-image: url(/public/assets/imgs/rede.jpg);
+  background-image: url(../assets/imgs/rede.jpg);
 }
 
 .card-conteudo {

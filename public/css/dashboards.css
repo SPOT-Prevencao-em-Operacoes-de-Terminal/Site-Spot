@@ -41,7 +41,7 @@ body {
 
 .barra-lateral {
     width: 220px;
-    background-color: #F8FAFC;
+    background-color: #0A2540;
     border-right: 1px solid var(--cor-borda);
     display: flex;
     flex-direction: column;
@@ -80,7 +80,7 @@ body {
     align-items: center;
     gap: 12px;
     text-decoration: none;
-    color: var(--azul-escuro);
+    color: var(--fundo-cartao);
     font-size: 14px;
     font-weight: 600;
 }
@@ -163,7 +163,7 @@ body {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background-color: var(--azul-escuro);
+    background-color: #FFFFFF;
     color: #FFFFFF;
     display: flex;
     align-items: center;

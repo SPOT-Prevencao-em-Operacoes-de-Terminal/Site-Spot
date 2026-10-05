@@ -73,7 +73,6 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
-  color: white;
 }
 
 .header a {
@@ -89,6 +88,18 @@ body {
   color: #0b0b32;
 }
 
+.navbar .agora a {
+  color: #00C3E3;
+  border-bottom: 2px solid #00C3E3;
+}
+
+.navbar .agora a:hover {
+  color: #00C3E3;
+}
+
+.separador {
+  color: rgba(255, 255, 255, 0.8);
+}
 
 .separador {
   color: rgba(255, 255, 255, 0.8);

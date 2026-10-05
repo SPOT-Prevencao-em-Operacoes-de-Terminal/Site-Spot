@@ -35,7 +35,7 @@ body {
 }
 
 .header .container {
-  width: 80%;
+  width: 90%;
   height: 100%;
   margin: auto;
   display: flex;
@@ -70,7 +70,33 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
-  color: rgb(255, 255, 255);
+  color: white;
+}
+
+.header a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  padding-bottom: 5px;
+  transition: 0.3s;
+}
+
+.header a:hover {
+  color: #0b0b32;
+}
+
+.navbar .agora a {
+  color: #00C3E3;
+  border-bottom: 2px solid #00C3E3;
+}
+
+.navbar .agora a:hover {
+  color: #00C3E3;
+}
+
+.separador {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .header a {

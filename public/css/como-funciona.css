@@ -255,16 +255,17 @@ body {
   border-radius: 2px;
 }
 
-.conteudo-passo-a-passo{
-    font-family: 'Lato' sans-serif;
+
+.conteudo-passo-a-passo {
+    font-family: 'Lato', sans-serif;
     display: flex;
     height: 450px;
     width: 100%;
     margin-top: 100px;
-    justify-content:space-around;
+    justify-content: center;
+    gap: 30px;
     align-items: center;
     text-align: left;
-
 }
 
 .conteudo-passo-a-passo .container {
@@ -291,9 +292,13 @@ body {
 
 
 }
-.conteudo-passo-a-passo .container img:hover {
-    transform: scale(1.05);
-}
+.conteudo-passo-a-passo .container:hover {
+transform: scale(1.02);
+
+    box-shadow:
+        0 0 10px rgba(31, 44, 156, 0.845),
+        0 0 25px rgba(50, 212, 234, 0.781),
+        0 12px 30px rgba(39, 218, 242, 0.857);}
 .conteudo .container h3{
     display: flex;
     justify-content: center;

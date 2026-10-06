@@ -7,57 +7,58 @@ html {
 .pagina-sobre{
     margin: 0;
     background-color: white;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Lato", sans-serif;
 }
-
-/* ===== MIOLO DA PÁGINA (entre navbar e footer-contato) ===== */
 
 .pagina-sobre .sobre{
     padding: 0;
     font-family: "Lato", sans-serif;
 }
 
-/* ---------- Navbar sobre o banner (mesmo padrão da tela Como funciona) ---------- */
-.pagina-sobre .navbar {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.navbar {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.pagina-sobre .header a {
-    text-decoration: none;
-    color: white;
-    font-size: 16px;
-    font-weight: 500;
-    padding-bottom: 5px;
-    transition: 0.3s;
+.header a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  padding-bottom: 5px;
+  transition: 0.3s;
 }
 
-.pagina-sobre .header a:hover {
-    color: #0b0b32;
+.header a:hover {
+  color: #0b0b32;
 }
 
-.pagina-sobre .navbar .agora a {
-    color: #00C3E3;
-    border-bottom: 2px solid #00C3E3;
+.navbar .agora a {
+  color: #00C3E3;
+  border-bottom: 2px solid #00C3E3;
 }
 
-.pagina-sobre .navbar .agora a:hover {
-    color: #00C3E3;
+.navbar .agora a:hover {
+  color: #00C3E3;
 }
 
-.pagina-sobre .separador {
-    color: rgba(255, 255, 255, 0.8);
+.separador {
+  color: rgba(255, 255, 255, 0.8);
 }
 
-/* ---------- Quem somos (banner) ---------- */
+.separador {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+
 .pagina-sobre .banner-sobre{
     height: 65vh;
     min-height: 560px;
@@ -175,9 +176,6 @@ html {
     line-height: 1.85;
 }
 
-/* ---------- Frase final (faixa com foto de fundo) ---------- */
-/* margin-bottom negativo = anula o margin-top: 80px do footer,
-   para a faixa encostar direto no footer sem lacuna branca */
 .pagina-sobre .bloco-final{
     min-height: 420px;
     display: flex;
@@ -235,7 +233,6 @@ html {
     border-radius: 10px;
 }
 
-/* ---------- Responsivo (só miolo) ---------- */
 @media (max-width: 960px){
     .pagina-sobre .banner-sobre{
         height: auto;
@@ -326,32 +323,11 @@ body {
   font-weight: 500;
 }
 
-.navbar {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  color: #052844;
-}
-
-.header a {
-  text-decoration: none;
-  color: #052844;
-  font-size: 16px;
-  font-weight: 500;
-  padding-bottom: 5px;
-  transition: 0.3s;
-}
-
 .header a:hover {
   color: #4d82bb;
 }
+
+
 
 .footer {
     background-color: #fafafa;

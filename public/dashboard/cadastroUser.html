@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="./../css/dashboards.css">
+    <link rel="stylesheet" href="./../css/cadastro-login.css">
 
     <script src="../js/sessao.js" defer></script>
     <script src="../js/alerta.js" defer></script>
@@ -27,7 +28,7 @@
             </div>
 
             <nav class="menu-lateral">
-                <a href="#" class="item-menu">
+                <a href="cardsAdmin.html" class="item-menu">
                     <i class="fa-solid fa-gear"></i>
                     <span>Configurações</span>
                 </a>
@@ -74,71 +75,231 @@
             </div>
             </header>
 
-            <div class="corpo-painel">
+    <div class="login">
+    
+    <div class="container">
+      <div class="card card-cadastro">
+        <div class="form-contato">
 
-                <section class="seccao-boas-vindas">
-                    <div class="texto-boas-vindas">
-                        <div class="linha-destaque"></div>
-                        <h2>Bem-vindo de volta, <span class="destaque-usuario">User</span></h2>
-                    </div>
+          <h2>Bem-vindo ao seu Cadastro SPOT</h2>
 
-                    <div class="ultima-atualizacao">
-                        <i class="fa-regular fa-clock"></i>
-                        <div class="info-atualizacao">
-                            <span>Última atualização</span>
-                            <strong id="data-atualizacao">26/09/2025 14:32</strong>
-                        </div>
-                    </div>
-                </section>
+          <p>
 
-                <section class="grelha-indicadores">
-                    <div class="cartao-indicador">
-                        <div class="conteudo-indicador">
-                            <span class="numero-indicador" id="indicador-total">0</span>
-                            <span class="rotulo-indicador">MÁQUINAS MONITORADAS</span>
-                        </div>
-                        <span class="ponto-estado ponto-azul"></span>
-                    </div>
+            Junte-se à SPOT e transforme o monitoramento da sua infraestrutura
+             com inteligência e prevenção.
 
-                    <div class="cartao-indicador">
-                        <div class="conteudo-indicador">
-                            <span class="numero-indicador" id="indicador-normal">0</span>
-                            <span class="rotulo-indicador">A OPERAR NORMALMENTE</span>
-                        </div>
-                        <span class="ponto-estado ponto-verde"></span>
-                    </div>
+          </p>
 
-                    <div class="cartao-indicador">
-                        <div class="conteudo-indicador">
-                            <span class="numero-indicador" id="indicador-atencao">0</span>
-                            <span class="rotulo-indicador">EM ESTADO DE ATENÇÃO</span>
-                        </div>
-                        <span class="ponto-estado ponto-amarelo"></span>
-                    </div>
+          <form class="form-contato" onsubmit="return cadastrar()">
 
-                    <div class="cartao-indicador">
-                        <div class="conteudo-indicador">
-                            <span class="numero-indicador" id="indicador-critico">0</span>
-                            <span class="rotulo-indicador">REQUER AÇÃO IMEDIATA</span>
-                        </div>
-                        <span class="ponto-estado ponto-vermelho"></span>
-                    </div>
-                </section>
+            <input type="text" id="nome_input" placeholder="Nome" required>
 
-                <section class="seccao-computadores">
-                    <div class="titulo-seccao">
-                        <div class="linha-destaque"></div>
-                        <h3>Computadores:</h3>
-                    </div>
+            <select id="cargo_input" required>
 
-                    <div class="grelha-cartoes" id="grelha-maquinas"></div>
-                </section>
+              <option value="" disabled selected hidden>Selecione o cargo</option>
+              <option value="Analista de TI">Analista de TI</option>
+              <option value="Gestor de TI">Gestor(a) de TI</option>
 
-            </div>
-        </main>
+            </select>
+
+            <input type="text" id="cpf_input" placeholder="CPF" maxlength="11" required inputmode="numeric">
+
+            <input type="email" id="email_input" placeholder="E-mail" required>
+
+            <input type="text" id="codigo_input" placeholder="Código da Empresa" required>
+
+            <input type="password" id="senha_input" placeholder="Senha" required>
+
+            <input type="password" id="confirmacao_senha_input" placeholder="Confirmar Senha" required>
+
+            <button type="submit">CADASTRE-SE</button>
+
+            <div class="alerta_erro">
+      <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
+      </div>
     </div>
 
+          </form>
+
+          <div id="div_erros_login"></div>
+        </div>
+      </div>
+    </div>
+  
+
     <script>
+
+        // Array para armazenar empresas cadastradas para validação de código de ativação 
+  let listaEmpresasCadastradas = [];
+
+  function cadastrar() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = nome_input.value;
+    var emailVar = email_input.value;
+    var cargoVar = cargo_input.value;
+    var cpfVar = cpf_input.value;
+    var senhaVar = senha_input.value;
+    var confirmacaoSenhaVar = confirmacao_senha_input.value;
+    var codigoVar = codigo_input.value;
+    var idEmpresaVincular
+
+    // Verificando se há algum campo em branco
+    if (
+      nomeVar == "" ||
+      emailVar == "" ||
+      cargoVar == "" || 
+      cpfVar == "" ||
+      senhaVar == "" ||
+      confirmacaoSenhaVar == "" ||
+      codigoVar == ""
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    if (cpfVar.length != 11 || isNaN(cpfVar)) {
+
+    cardErro.style.display = "block";
+
+    mensagem_erro.innerHTML =
+        "O CPF deve possuir 11 números.";
+
+    setTimeout(sumirMensagem, 5000);
+
+    return false;
+}
+
+    if (!emailVar.includes("@")) {
+      
+      cardErro.style.display = "block";
+      
+      mensagem_erro.innerHTML =
+        "Informe um e-mail válido.";
+        
+        setTimeout(sumirMensagem, 5000); return false; }
+
+    if (senhaVar.length < 8 ) {
+
+    cardErro.style.display = "block";
+
+    mensagem_erro.innerHTML =
+        "A senha deve possuir pelo menos 8 caracteres.";
+
+    setTimeout(sumirMensagem, 5000);
+
+    return false;
+}
+
+    if (senhaVar != confirmacaoSenhaVar) {
+      
+      cardErro.style.display = "block";
+      
+      mensagem_erro.innerHTML =
+        "As senhas não coincidem.";
+        
+        setTimeout(sumirMensagem, 5000); return false; }
+
+    // Verificando se o código de ativação é de alguma empresa cadastrada
+    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+
+    if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+
+        idEmpresaVincular = listaEmpresasCadastradas[i].id_empresa;
+
+        console.log("Código de ativação válido.");
+
+        break;
+    }
+}
+
+if (idEmpresaVincular == undefined) {
+
+    cardErro.style.display = "block";
+
+    mensagem_erro.innerHTML =
+        "Código da empresa inválido.";
+
+    setTimeout(sumirMensagem, 5000);
+
+    return false;
+}
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        cargoServer: cargoVar,
+        cpfServer: cpfVar,
+        senhaServer: senhaVar,
+        idEmpresaVincularServer: idEmpresaVincular
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.classList.add("card_sucesso");
+mensagem_erro.innerHTML =
+    "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }
+
+  // Listando empresas cadastradas 
+  function listar() {
+    fetch("/empresas/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            listaEmpresasCadastradas.push(empresa);
+
+            console.log("listaEmpresasCadastradas")
+            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
 
         function limparSessao() {
             sessionStorage.clear();

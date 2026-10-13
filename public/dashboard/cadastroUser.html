@@ -2,344 +2,410 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPOT | Painel de Monitorização</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPOT | Painel de Monitorização</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/cadastro-login.css">
+  <link rel="stylesheet" href="./../css/dashboards.css">
+  <link rel="stylesheet" href="./../css/cadastro-login.css">
+  <link rel="stylesheet" href="./../css/cadastroUser.css">
 
-    <script src="../js/sessao.js" defer></script>
-    <script src="../js/alerta.js" defer></script>
+  <script src="../js/sessao.js" defer></script>
+  <script src="../js/alerta.js" defer></script>
 </head>
 
-<body onload="exibirMaquinas()">
-    <div class="layout-aplicacao">
+<body onload="listar(); listarUsuarios()">
+  <div class="layout-aplicacao">
 
-        <aside class="barra-lateral">
-            <div class="area-marca">
-                <img src="../assets/icon/logo-branca.png" alt="Logo SPOT" class="imagem-logo">
+    <aside class="barra-lateral">
+      <div class="area-marca">
+        <img src="../assets/icon/logo-branca.png" alt="Logo SPOT" class="imagem-logo">
+      </div>
+
+      <nav class="menu-lateral">
+        <a href="cardsAdmin.html" class="item-menu">
+          <i class="fa-solid fa-gear"></i>
+          <span>Configurações</span>
+        </a>
+
+        <a href="#" class="item-menu">
+          <i class="fa-solid fa-server"></i>
+          <span>Cadastrar Nova Máquina</span>
+        </a>
+
+        <a href="cadastroUser.html" class="item-menu">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Cadastrar Novo Usuário</span>
+        </a>
+      </nav>
+
+      <div class="rodape-lateral">
+        <div class="linha-rodape"></div>
+        <p>Mais controle,<br>menos riscos.</p>
+      </div>
+    </aside>
+
+    <main class="conteudo-principal">
+
+      <header class="cabecalho-superior">
+        <nav class="navegacao-cabecalho">
+          <a href="#" class="aba-navegacao activa">
+            <i class="fa-solid fa-house"></i>
+            <span>Início</span>
+          </a>
+        </nav>
+
+        <div class="perfil-usuario">
+          <div class="avatar-usuario">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <span class="nome-usuario">Olá, <strong id="b_usuario">User</strong></span>
+
+          <div class="menu-dropdown-usuario" id="menu-dropdown-usuario">
+            <a href="../login.html" class="item-dropdown-logout" onclick="limparSessao()">
+              <i class="fa-solid fa-right-from-bracket"></i>
+            </a>
+            </a>
+          </div>
+        </div>
+      </header>
+
+
+      <div class="pagina-cadastro-usuarios">
+
+        <section class="painel-lista-usuarios">
+
+          <div class="cabecalho-lista-usuarios">
+            <div>
+              <h2>Usuários cadastrados</h2>
+              <p>Colaboradores com acesso à plataforma SPOT.</p>
             </div>
 
-            <nav class="menu-lateral">
-                <a href="cardsAdmin.html" class="item-menu">
-                    <i class="fa-solid fa-gear"></i>
-                    <span>Configurações</span>
-                </a>
-                
-                <a href="#" class="item-menu">
-                    <i class="fa-solid fa-server"></i>
-                    <span>Cadastrar Nova Máquina</span>
-                </a>
+            <span class="contador-usuarios" id="contador_usuarios">0</span>
+          </div>
 
-                <a href="cadastroUser.html" class="item-menu">
-                    <i class="fa-solid fa-server"></i>
-                    <span>Cadastrar Novo Usuário</span>
-                </a>
-            </nav>
+          <div class="lista-usuarios" id="lista-usuarios">
 
-            <div class="rodape-lateral">
-                <div class="linha-rodape"></div>
-                <p>Mais controle,<br>menos riscos.</p>
+            <div class="estado-lista-usuarios" id="estado-lista-usuarios">
+              <i class="fa-solid fa-users"></i>
+              <h3>Nenhum usuário listado</h3>
+              <p>Os usuários cadastrados aparecerão aqui.</p>
             </div>
-        </aside>
 
-        <main class="conteudo-principal">
+          </div>
 
-            <header class="cabecalho-superior">
-                <nav class="navegacao-cabecalho">
-                    <a href="#" class="aba-navegacao activa">
-                        <i class="fa-solid fa-house"></i>
-                        <span>Início</span>
-                    </a>
-                </nav>
+        </section>
 
-                <div class="perfil-usuario">
-                <div class="avatar-usuario">
-                    <i class="fa-solid fa-user"></i>
+        <section class="painel-formulario-usuario">
+
+          <div class="formulario-usuario">
+
+            <h2>Cadastrar novo usuário</h2>
+
+            <p class="descricao-formulario-usuario">
+              Adicione os usuários que terão acesso à plataforma SPOT.
+              Informe os dados do colaborador para permitir que ele
+              realize o login e acesse a dashboard.
+            </p>
+
+            <form class="form-contato" onsubmit="return cadastrar()">
+
+              <input type="text" id="nome_input" placeholder="Nome" required>
+
+              <select id="cargo_input" required>
+                <option value="" disabled selected hidden>Selecione o cargo</option>
+                <option value="Analista de TI">Analista de TI</option>
+                <option value="Gestor de TI">Gestor(a) de TI</option>
+              </select>
+
+              <input type="text" id="cpf_input" placeholder="CPF" maxlength="11" required inputmode="numeric">
+
+              <input type="email" id="email_input" placeholder="E-mail" required>
+
+              <input type="text" id="codigo_input" placeholder="Código da Empresa" required>
+
+              <input type="password" id="senha_input" placeholder="Senha" required>
+
+              <input type="password" id="confirmacao_senha_input" placeholder="Confirmar Senha" required>
+
+              <button type="submit">CADASTRAR</button>
+
+              <div class="alerta_erro">
+                <div class="card_erro" id="cardErro">
+                  <span id="mensagem_erro"></span>
                 </div>
-                <span class="nome-usuario">Olá, <strong id="b_usuario">User</strong></span>
+              </div>
 
-                <div class="menu-dropdown-usuario" id="menu-dropdown-usuario">
-                    <a href="../login.html" class="item-dropdown-logout" onclick="limparSessao()">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                </a>
-                </a>
-                </div>
-            </div>
-            </header>
+            </form>
 
-    <div class="login">
-    
-    <div class="container">
-      <div class="card card-cadastro">
-        <div class="form-contato">
+            <div id="div_erros_login"></div>
 
-          <h2>Bem-vindo ao seu Cadastro SPOT</h2>
+          </div>
+
+        </section>
+
+      </div>
+
+
+      <div class="modal-exclusao" id="modal-exclusao">
+        <div class="conteudo-modal-exclusao">
+          <div class="icone-modal-exclusao">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+
+          <h2>Excluir usuário?</h2>
 
           <p>
-
-            Junte-se à SPOT e transforme o monitoramento da sua infraestrutura
-             com inteligência e prevenção.
-
+            Tem certeza de que deseja excluir
+            <strong id="nome-usuario-exclusao"></strong>?
+            Essa ação não poderá ser desfeita.
           </p>
 
-          <form class="form-contato" onsubmit="return cadastrar()">
+          <div class="botoes-modal-exclusao">
+            <button type="button" class="botao-cancelar-exclusao" onclick="fecharModalExclusao()">
+              Cancelar
+            </button>
 
-            <input type="text" id="nome_input" placeholder="Nome" required>
-
-            <select id="cargo_input" required>
-
-              <option value="" disabled selected hidden>Selecione o cargo</option>
-              <option value="Analista de TI">Analista de TI</option>
-              <option value="Gestor de TI">Gestor(a) de TI</option>
-
-            </select>
-
-            <input type="text" id="cpf_input" placeholder="CPF" maxlength="11" required inputmode="numeric">
-
-            <input type="email" id="email_input" placeholder="E-mail" required>
-
-            <input type="text" id="codigo_input" placeholder="Código da Empresa" required>
-
-            <input type="password" id="senha_input" placeholder="Senha" required>
-
-            <input type="password" id="confirmacao_senha_input" placeholder="Confirmar Senha" required>
-
-            <button type="submit">CADASTRE-SE</button>
-
-            <div class="alerta_erro">
-      <div class="card_erro" id="cardErro">
-        <span id="mensagem_erro"></span>
-      </div>
-    </div>
-
-          </form>
-
-          <div id="div_erros_login"></div>
+            <button type="button" class="botao-confirmar-exclusao" onclick="confirmarExclusao()">
+              Sim, excluir
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  
 
-    <script>
+      <script>
 
         // Array para armazenar empresas cadastradas para validação de código de ativação 
-  let listaEmpresasCadastradas = [];
+        let listaEmpresasCadastradas = [];
 
-  function cadastrar() {
-    // aguardar();
+        function cadastrar() {
+          // aguardar();
 
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
-    var nomeVar = nome_input.value;
-    var emailVar = email_input.value;
-    var cargoVar = cargo_input.value;
-    var cpfVar = cpf_input.value;
-    var senhaVar = senha_input.value;
-    var confirmacaoSenhaVar = confirmacao_senha_input.value;
-    var codigoVar = codigo_input.value;
-    var idEmpresaVincular
+          //Recupere o valor da nova input pelo nome do id
+          // Agora vá para o método fetch logo abaixo
+          var nomeVar = nome_input.value;
+          var emailVar = email_input.value;
+          var cargoVar = cargo_input.value;
+          var cpfVar = cpf_input.value;
+          var senhaVar = senha_input.value;
+          var confirmacaoSenhaVar = confirmacao_senha_input.value;
+          var codigoVar = codigo_input.value;
+          var idEmpresaVincular
 
-    // Verificando se há algum campo em branco
-    if (
-      nomeVar == "" ||
-      emailVar == "" ||
-      cargoVar == "" || 
-      cpfVar == "" ||
-      senhaVar == "" ||
-      confirmacaoSenhaVar == "" ||
-      codigoVar == ""
-    ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
+          // Verificando se há algum campo em branco
+          if (
+            nomeVar == "" ||
+            emailVar == "" ||
+            cargoVar == "" ||
+            cpfVar == "" ||
+            senhaVar == "" ||
+            confirmacaoSenhaVar == "" ||
+            codigoVar == ""
+          ) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+              "(Mensagem de erro para todos os campos em branco)";
 
-      finalizarAguardar();
-      return false;
-    } else {
-      setInterval(sumirMensagem, 5000);
-    }
+            finalizarAguardar();
+            return false;
+          } else {
+            setInterval(sumirMensagem, 5000);
+          }
 
-    if (cpfVar.length != 11 || isNaN(cpfVar)) {
+          if (cpfVar.length != 11 || isNaN(cpfVar)) {
 
-    cardErro.style.display = "block";
+            cardErro.style.display = "block";
 
-    mensagem_erro.innerHTML =
-        "O CPF deve possuir 11 números.";
+            mensagem_erro.innerHTML =
+              "O CPF deve possuir 11 números.";
 
-    setTimeout(sumirMensagem, 5000);
+            setTimeout(sumirMensagem, 5000);
 
-    return false;
-}
+            return false;
+          }
 
-    if (!emailVar.includes("@")) {
-      
-      cardErro.style.display = "block";
-      
-      mensagem_erro.innerHTML =
-        "Informe um e-mail válido.";
-        
-        setTimeout(sumirMensagem, 5000); return false; }
+          if (!emailVar.includes("@")) {
 
-    if (senhaVar.length < 8 ) {
+            cardErro.style.display = "block";
 
-    cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+              "Informe um e-mail válido.";
 
-    mensagem_erro.innerHTML =
-        "A senha deve possuir pelo menos 8 caracteres.";
+            setTimeout(sumirMensagem, 5000); return false;
+          }
 
-    setTimeout(sumirMensagem, 5000);
+          if (senhaVar.length < 8) {
 
-    return false;
-}
+            cardErro.style.display = "block";
 
-    if (senhaVar != confirmacaoSenhaVar) {
-      
-      cardErro.style.display = "block";
-      
-      mensagem_erro.innerHTML =
-        "As senhas não coincidem.";
-        
-        setTimeout(sumirMensagem, 5000); return false; }
+            mensagem_erro.innerHTML =
+              "A senha deve possuir pelo menos 8 caracteres.";
 
-    // Verificando se o código de ativação é de alguma empresa cadastrada
-    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+            setTimeout(sumirMensagem, 5000);
 
-    if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+            return false;
+          }
 
-        idEmpresaVincular = listaEmpresasCadastradas[i].id_empresa;
+          if (senhaVar != confirmacaoSenhaVar) {
 
-        console.log("Código de ativação válido.");
+            cardErro.style.display = "block";
 
-        break;
-    }
-}
+            mensagem_erro.innerHTML =
+              "As senhas não coincidem.";
 
-if (idEmpresaVincular == undefined) {
+            setTimeout(sumirMensagem, 5000); return false;
+          }
 
-    cardErro.style.display = "block";
+          // Verificando se o código de ativação é de alguma empresa cadastrada
+          for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
 
-    mensagem_erro.innerHTML =
-        "Código da empresa inválido.";
+            if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
 
-    setTimeout(sumirMensagem, 5000);
+              idEmpresaVincular = listaEmpresasCadastradas[i].id_empresa;
 
-    return false;
-}
+              console.log("Código de ativação válido.");
 
-    // Enviando o valor da nova input
-    fetch("/usuarios/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        emailServer: emailVar,
-        cargoServer: cargoVar,
-        cpfServer: cpfVar,
-        senhaServer: senhaVar,
-        idEmpresaVincularServer: idEmpresaVincular
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
+              break;
+            }
+          }
 
-        if (resposta.ok) {
-          cardErro.classList.add("card_sucesso");
-mensagem_erro.innerHTML =
-    "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+          if (idEmpresaVincular == undefined) {
 
-          setTimeout(() => {
-            window.location = "login.html";
-          }, "2000");
+            cardErro.style.display = "block";
 
-          limparFormulario();
-          finalizarAguardar();
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
+            mensagem_erro.innerHTML =
+              "Código da empresa inválido.";
+
+            setTimeout(sumirMensagem, 5000);
+
+            return false;
+          }
+
+          if (String(idEmpresaVincular) !== String(sessionStorage.ID_EMPRESA)) {
+            cardErro.style.display = "block";
+            mensagem_erro.textContent =
+              "O código informado não corresponde à sua empresa.";
+
+            setTimeout(sumirMensagem, 5000);
+            return false;
+          }
+
+          // Enviando o valor da nova input
+          fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              // crie um atributo que recebe o valor recuperado aqui
+              // Agora vá para o arquivo routes/usuario.js
+              nomeServer: nomeVar,
+              emailServer: emailVar,
+              cargoServer: cargoVar,
+              cpfServer: cpfVar,
+              senhaServer: senhaVar,
+              idEmpresaVincularServer: idEmpresaVincular
+            }),
+          })
+            .then(function (resposta) {
+              console.log("resposta: ", resposta);
+
+
+              if (resposta.ok) {
+                cardErro.classList.add("card_sucesso");
+
+                mensagem_erro.textContent =
+                  "Usuário cadastrado com sucesso!";
+
+                cardErro.style.display = "block";
+
+                document.querySelector(".form-contato").reset();
+
+                listarUsuarios();
+
+                setTimeout(sumirMensagem, 5000);
+              } else {
+                throw new Error("Houve um erro ao tentar realizar o cadastro!");
+              }
+            })
+            .catch(function (resposta) {
+              console.log(`#ERRO: ${resposta}`);
+              finalizarAguardar();
+            });
+
+          return false;
         }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
-      });
 
-    return false;
-  }
+        // Listando empresas cadastradas 
+        function listar() {
+          fetch("/empresas/listar", {
+            method: "GET",
+          })
+            .then(function (resposta) {
+              resposta.json().then((empresas) => {
+                empresas.forEach((empresa) => {
+                  listaEmpresasCadastradas.push(empresa);
 
-  // Listando empresas cadastradas 
-  function listar() {
-    fetch("/empresas/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaEmpresasCadastradas.push(empresa);
+                  console.log("listaEmpresasCadastradas")
+                  console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+                });
+              });
+            })
+            .catch(function (resposta) {
+              console.log(`#ERRO: ${resposta}`);
+            });
+        }
 
-            console.log("listaEmpresasCadastradas")
-            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
-          });
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
-
-  function sumirMensagem() {
-    cardErro.style.display = "none";
-  }
+        function sumirMensagem() {
+          cardErro.style.display = "none";
+        }
 
         function limparSessao() {
-            sessionStorage.clear();
+          sessionStorage.clear();
         }
 
 
         function navegarParaDashboard(idMaquina) {
-            sessionStorage.ID_MAQUINA = idMaquina;
-            window.location.href = "./dashboardAdmin.html";
+          sessionStorage.ID_MAQUINA = idMaquina;
+          window.location.href = "./dashboardAdmin.html";
         }
 
         const listaMaquinas = [
-            { id: "01", estado: "normal", cpu: 24, ram: 62, disco: 18 },
-            { id: "02", estado: "atencao", cpu: 68, ram: 73, disco: 41 },
-            { id: "03", estado: "critico", cpu: 92, ram: 88, disco: 76 },
-            { id: "04", estado: "normal", cpu: 31, ram: 48, disco: 22 },
-            { id: "05", estado: "normal", cpu: 27, ram: 59, disco: 34 },
-            { id: "06", estado: "atencao", cpu: 71, ram: 66, disco: 49 },
+          { id: "01", estado: "normal", cpu: 24, ram: 62, disco: 18 },
+          { id: "02", estado: "atencao", cpu: 68, ram: 73, disco: 41 },
+          { id: "03", estado: "critico", cpu: 92, ram: 88, disco: 76 },
+          { id: "04", estado: "normal", cpu: 31, ram: 48, disco: 22 },
+          { id: "05", estado: "normal", cpu: 27, ram: 59, disco: 34 },
+          { id: "06", estado: "atencao", cpu: 71, ram: 66, disco: 49 },
         ];
 
         function exibirMaquinas() {
-            const container = document.getElementById("grelha-maquinas");
-            container.innerHTML = "";
+          const container = document.getElementById("grelha-maquinas");
+          container.innerHTML = "";
 
-            let totalNormal = 0, totalAtencao = 0, totalCritico = 0;
+          let totalNormal = 0, totalAtencao = 0, totalCritico = 0;
 
-            const configuracaoEtiqueta = {
-                normal: { classe: "etiqueta-normal", texto: "Normal" },
-                atencao: { classe: "etiqueta-atencao", texto: "Atenção" },
-                critico: { classe: "etiqueta-critica", texto: "Crítico" }
-            };
+          const configuracaoEtiqueta = {
+            normal: { classe: "etiqueta-normal", texto: "Normal" },
+            atencao: { classe: "etiqueta-atencao", texto: "Atenção" },
+            critico: { classe: "etiqueta-critica", texto: "Crítico" }
+          };
 
-            listaMaquinas.forEach(item => {
-                if (item.estado === "normal") totalNormal++;
-                if (item.estado === "atencao") totalAtencao++;
-                if (item.estado === "critico") totalCritico++;
+          listaMaquinas.forEach(item => {
+            if (item.estado === "normal") totalNormal++;
+            if (item.estado === "atencao") totalAtencao++;
+            if (item.estado === "critico") totalCritico++;
 
-                const config = configuracaoEtiqueta[item.estado] || configuracaoEtiqueta.normal;
+            const config = configuracaoEtiqueta[item.estado] || configuracaoEtiqueta.normal;
 
-                container.innerHTML += `
+            container.innerHTML += `
                     <div class="cartao-maquina" onclick="navegarParaDashboard('${item.id}')">
                         <div class="cabecalho-cartao">
                             <div class="info-maquina">
@@ -375,14 +441,244 @@ mensagem_erro.innerHTML =
                         </div>
                     </div>
                 `;
-            });
+          });
 
-            document.getElementById("indicador-total").innerText = listaMaquinas.length;
-            document.getElementById("indicador-normal").innerText = totalNormal;
-            document.getElementById("indicador-atencao").innerText = totalAtencao;
-            document.getElementById("indicador-critico").innerText = totalCritico;
+          document.getElementById("indicador-total").innerText = listaMaquinas.length;
+          document.getElementById("indicador-normal").innerText = totalNormal;
+          document.getElementById("indicador-atencao").innerText = totalAtencao;
+          document.getElementById("indicador-critico").innerText = totalCritico;
         }
-    </script>
+
+
+        function listarUsuarios() {
+          var idEmpresa = sessionStorage.ID_EMPRESA;
+
+          if (!idEmpresa) {
+            console.error("Empresa do usuário não encontrada. Faça login novamente.");
+            return;
+          }
+
+          fetch(`/usuarios/listar/${encodeURIComponent(idEmpresa)}`)
+            .then(function (resposta) {
+              if (!resposta.ok) {
+                throw new Error("Não foi possível carregar os usuários.");
+              }
+
+              return resposta.json();
+            })
+            .then(function (usuarios) {
+              var lista = document.getElementById("lista-usuarios");
+              var estadoVazio = document.getElementById("estado-lista-usuarios");
+              var contador = document.getElementById("contador_usuarios");
+
+              lista.innerHTML = "";
+              contador.textContent = usuarios.length;
+
+              if (usuarios.length === 0) {
+                lista.innerHTML = `
+                    <div class="estado-lista-usuarios">
+                        <i class="fa-solid fa-users"></i>
+                        <h3>Nenhum usuário cadastrado</h3>
+                        <p>Os usuários cadastrados aparecerão aqui.</p>
+                    </div>
+                `;
+                return;
+              }
+
+              usuarios.forEach(function (usuario) {
+                var item = document.createElement("div");
+                item.className = "item-usuario-cadastrado";
+                item.dataset.idUsuario = usuario.id_usuario;
+
+                var icone = document.createElement("div");
+                icone.className = "icone-usuario-cadastrado";
+
+                var simbolo = document.createElement("i");
+                simbolo.className = "fa-solid fa-user";
+                icone.appendChild(simbolo);
+
+                var dados = document.createElement("div");
+                dados.className = "dados-usuario-cadastrado";
+
+                var nome = document.createElement("span");
+                nome.className = "nome-usuario-cadastrado";
+                nome.textContent = usuario.nome;
+
+                var email = document.createElement("span");
+                email.className = "email-usuario-cadastrado";
+                email.textContent = usuario.email;
+
+
+                dados.appendChild(nome);
+                dados.appendChild(email);
+
+                var botaoEditar = document.createElement("button");
+                botaoEditar.type = "button";
+                botaoEditar.className = "botao-editar-usuario";
+                botaoEditar.title = "Editar usuário";
+                botaoEditar.setAttribute("aria-label", "Editar " + usuario.nome);
+                botaoEditar.innerHTML = '<i class="fa-solid fa-gear"></i>';
+                botaoEditar.onclick = function () {
+                  abrirEdicaoUsuario(usuario.id_usuario, usuario.nome, usuario.email);
+                };
+
+                item.appendChild(icone);
+                item.appendChild(dados);
+                item.appendChild(botaoEditar);
+
+                lista.appendChild(item);
+              });
+            })
+            .catch(function (erro) {
+              console.error("Erro ao carregar usuários:", erro);
+            });
+        }
+
+
+        var usuarioEmEdicao = null;
+        var usuarioParaExcluir = null;
+
+        function abrirEdicaoUsuario(id, nomeAtual, emailAtual) {
+    if (usuarioEmEdicao !== null) {
+        listarUsuarios();
+    }
+
+    usuarioEmEdicao = id;
+
+    var card = document.querySelector(
+        '.item-usuario-cadastrado[data-id-usuario="' + id + '"]'
+    );
+
+    if (!card) {
+        return;
+    }
+
+    card.innerHTML = `
+        <div class="form-edicao-usuario">
+            <label for="editar-nome-${id}">Nome</label>
+            <input type="text" id="editar-nome-${id}" required>
+
+            <label for="editar-email-${id}">E-mail</label>
+            <input type="email" id="editar-email-${id}" required>
+
+            <div class="botoes-edicao-usuario">
+                <button type="button" class="botao-ok-usuario"
+                    onclick="fecharEdicaoUsuario()">
+                    <i class="fa-solid fa-check"></i> OK
+                </button>
+
+                <button type="button" class="botao-excluir-usuario">
+                    <i class="fa-solid fa-trash"></i> Excluir
+                </button>
+
+                <button type="button" class="botao-salvar-usuario">
+                    <i class="fa-solid fa-floppy-disk"></i> Salvar
+                </button>
+            </div>
+        </div>
+    `;
+
+    card.querySelector("#editar-nome-" + id).value = nomeAtual;
+    card.querySelector("#editar-email-" + id).value = emailAtual;
+
+    card.querySelector(".botao-excluir-usuario").onclick = function () {
+        abrirModalExclusao(id, nomeAtual);
+    };
+
+    card.querySelector(".botao-salvar-usuario").onclick = function () {
+        salvarEdicaoUsuario(id);
+    };
+}
+
+        function salvarEdicaoUsuario(id) {
+          var nome = document.getElementById("editar-nome-" + id).value.trim();
+          var email = document.getElementById("editar-email-" + id).value.trim();
+          var idEmpresa = sessionStorage.ID_EMPRESA;
+
+          if (!nome || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            alert("Informe um nome e um e-mail válidos.");
+            return;
+          }
+
+          fetch("/usuarios/editar/" + id, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              nome: nome,
+              email: email,
+              idEmpresa: idEmpresa
+            })
+          })
+            .then(function (resposta) {
+              if (!resposta.ok) {
+                throw new Error("Não foi possível salvar as alterações.");
+              }
+
+              return resposta.json();
+            })
+            .then(function () {
+              usuarioEmEdicao = null;
+              listarUsuarios();
+            })
+            .catch(function (erro) {
+              console.error("Erro ao editar usuário:", erro);
+              alert("Não foi possível salvar as alterações.");
+            });
+        }
+
+        function abrirModalExclusao(id, nome) {
+          usuarioParaExcluir = id;
+          document.getElementById("nome-usuario-exclusao").textContent = nome;
+          document.getElementById("modal-exclusao").classList.add("modal-aberto");
+        }
+
+        function fecharModalExclusao() {
+          usuarioParaExcluir = null;
+          document.getElementById("modal-exclusao").classList.remove("modal-aberto");
+        }
+
+        function confirmarExclusao() {
+          if (usuarioParaExcluir === null) {
+            return;
+          }
+
+          var id = usuarioParaExcluir;
+
+          fetch("/usuarios/excluir/" + id, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              idEmpresa: sessionStorage.ID_EMPRESA
+            })
+          })
+            .then(function (resposta) {
+              if (!resposta.ok) {
+                throw new Error("Não foi possível excluir o usuário.");
+              }
+
+              return resposta.json();
+            })
+            .then(function () {
+              fecharModalExclusao();
+              usuarioEmEdicao = null;
+              listarUsuarios();
+            })
+            .catch(function (erro) {
+              console.error("Erro ao excluir usuário:", erro);
+              fecharModalExclusao();
+              alert("Não foi possível excluir o usuário.");
+            });
+        }
+
+        function fecharEdicaoUsuario() {
+    usuarioEmEdicao = null;
+    listarUsuarios();
+}
+      </script>
 </body>
 
 </html>

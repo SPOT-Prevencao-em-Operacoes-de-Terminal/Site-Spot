@@ -87,7 +87,103 @@ function cadastrar(req, res) {
     }
 }
 
+
+function listarPorEmpresa(req, res) {
+    var idEmpresa = Number(req.params.idEmpresa);
+
+    if (!Number.isInteger(idEmpresa) || idEmpresa <= 0) {
+        return res.status(400).json({
+            mensagem: "Identificador de empresa inválido."
+        });
+    }
+
+    usuarioModel.listarPorEmpresa(idEmpresa)
+        .then(function (resultado) {
+            res.status(200).json(resultado);
+        })
+        .catch(function (erro) {
+            console.log("Erro ao listar usuários:", erro);
+            res.status(500).json({
+                mensagem: "Não foi possível listar os usuários."
+            });
+        });
+}
+
+
+function atualizarUsuario(req, res) {
+    var idUsuario = Number(req.params.idUsuario);
+    var idEmpresa = Number(req.body.idEmpresa);
+    var nome = req.body.nome;
+    var email = req.body.email;
+
+    if (
+        !Number.isInteger(idUsuario) || idUsuario <= 0 ||
+        !Number.isInteger(idEmpresa) || idEmpresa <= 0 ||
+        typeof nome !== "string" || nome.trim().length === 0 ||
+        typeof email !== "string" ||
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
+    ) {
+        return res.status(400).json({
+            mensagem: "Informe um nome e um e-mail válidos."
+        });
+    }
+
+    usuarioModel.atualizarUsuario(
+        idUsuario,
+        nome.trim(),
+        email.trim(),
+        idEmpresa
+    )
+        .then(function () {
+            res.status(200).json({
+                mensagem: "Usuário atualizado com sucesso."
+            });
+        })
+        .catch(function (erro) {
+            console.log("Erro ao atualizar usuário:", erro);
+            res.status(500).json({
+                mensagem: "Não foi possível atualizar o usuário."
+            });
+        });
+}
+
+function excluirUsuario(req, res) {
+    var idUsuario = Number(req.params.idUsuario);
+    var idEmpresa = Number(req.body.idEmpresa);
+
+    if (
+        !Number.isInteger(idUsuario) || idUsuario <= 0 ||
+        !Number.isInteger(idEmpresa) || idEmpresa <= 0
+    ) {
+        return res.status(400).json({
+            mensagem: "Identificador inválido."
+        });
+    }
+
+    usuarioModel.excluirUsuario(idUsuario, idEmpresa)
+        .then(function (resultado) {
+            if (resultado.affectedRows === 0) {
+                return res.status(404).json({
+                    mensagem: "Usuário não encontrado nesta empresa."
+                });
+            }
+
+            res.status(200).json({
+                mensagem: "Usuário excluído com sucesso."
+            });
+        })
+        .catch(function (erro) {
+            console.log("Erro ao excluir usuário:", erro);
+            res.status(500).json({
+                mensagem: "Não foi possível excluir o usuário."
+            });
+        });
+}
+
 module.exports = {
     autenticar,
-    cadastrar
-}
+    cadastrar,
+    listarPorEmpresa,
+    atualizarUsuario,
+    excluirUsuario
+};

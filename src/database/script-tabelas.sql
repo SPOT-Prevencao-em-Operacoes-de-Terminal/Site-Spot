@@ -97,3 +97,11 @@ INSERT INTO empresa (razao_social, nome_fantasia, cnpj, codigo_ativacao) VALUES
 ('Companhia Docas do Rio de Janeiro', 'Porto do Rio de Janeiro', '00000000000104', 'RIO123'),
 ('Complexo Industrial Portuário de Suape', 'Porto de Suape', '00000000000105', 'SUAPE123'),
 ('Porto de Itajaí S.A.', 'Porto de Itajaí', '00000000000106', 'ITAJAI123');
+
+INSERT INTO usuario (nome, cargo, cpf, email, senha, fk_empresa) VALUES
+('Admin Santos', 'Administrador', '11111111101', 'admin.santos@spot.com', 'Spot@123', 1),
+('Admin Navegantes', 'Administrador', '11111111102', 'admin.navegantes@spot.com', 'Spot@123', 2),
+('Admin Paranagua', 'Administrador', '11111111103', 'admin.paranagua@spot.com', 'Spot@123', 3),
+('Admin Rio', 'Administrador', '11111111104', 'admin.rio@spot.com', 'Spot@123', 4),
+('Admin Suape', 'Administrador', '11111111105', 'admin.suape@spot.com', 'Spot@123', 5),
+('Admin Itajai', 'Administrador', '11111111106', 'admin.itajai@spot.com', 'Spot@123', 6);

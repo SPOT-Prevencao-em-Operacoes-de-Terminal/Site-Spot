@@ -12,4 +12,17 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+
+router.get("/listar/:idEmpresa", function (req, res) {
+    usuarioController.listarPorEmpresa(req, res);
+});
+
+router.put("/editar/:idUsuario", function (req, res) {
+    usuarioController.atualizarUsuario(req, res);
+});
+
+router.delete("/excluir/:idUsuario", function (req, res) {
+    usuarioController.excluirUsuario(req, res);
+});
+
 module.exports = router;

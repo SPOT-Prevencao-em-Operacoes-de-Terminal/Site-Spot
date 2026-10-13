@@ -25,7 +25,49 @@ function cadastrar(nome, cargo, cpf, email, senha, fkEmpresa) {
     return database.executar(instrucaoSql);
 }
 
+function listarPorEmpresa(idEmpresa) {
+    var instrucaoSql = `
+        SELECT id_usuario, nome, email
+        FROM usuario
+        WHERE fk_empresa = '${idEmpresa}'
+        ORDER BY id_usuario DESC;
+    `;
+
+    return database.executar(instrucaoSql);
+}
+
+
+function atualizarUsuario(idUsuario, nome, email, idEmpresa) {
+    var instrucaoSql = `
+        UPDATE usuario
+        SET nome = ?, email = ?
+        WHERE id_usuario = ? AND fk_empresa = ?;
+    `;
+
+    return database.executar(instrucaoSql, [
+        nome,
+        email,
+        idUsuario,
+        idEmpresa
+    ]);
+}
+
+function excluirUsuario(idUsuario, idEmpresa) {
+    var instrucaoSql = `
+        DELETE FROM usuario
+        WHERE id_usuario = ? AND fk_empresa = ?;
+    `;
+
+    return database.executar(instrucaoSql, [
+        idUsuario,
+        idEmpresa
+    ]);
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    listarPorEmpresa,
+    atualizarUsuario,
+    excluirUsuario
 };

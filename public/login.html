@@ -27,41 +27,41 @@
   <!--header inicio-->
 
   <div class="header">
-        <div class="container">
+    <div class="container">
 
-            <h1 class="titulo">
-                <img src="assets/icon/logo-azul.png" alt="SPOT - Sistema de Prevenção Operacional de Terminais"
-                    class="logo-site">
-            </h1>
+      <h1 class="titulo">
+        <img src="assets/icon/logo-azul.png" alt="SPOT - Sistema de Prevenção Operacional de Terminais"
+          class="logo-site">
+      </h1>
 
-            <ul class="navbar">
+      <ul class="navbar">
 
-                <li class="agora">
-                    <a href="index.html"><b>Inicial</b></a>
-                </li>
+        <li class="agora">
+          <a href="index.html"><b>Inicial</b></a>
+        </li>
 
-                <li>
-                    <a href="sobre nos.html"><b>Sobre Nós</b></a>
-                </li>
+        <li>
+          <a href="sobre nos.html"><b>Sobre Nós</b></a>
+        </li>
 
-                <li>
-                    <a href="como-funciona.html"><b>Como funciona</b></a>
-                </li>
+        <li>
+          <a href="como-funciona.html"><b>Como funciona</b></a>
+        </li>
 
-                <li class="separador">|</li>
+        <li class="separador">|</li>
 
-                <li>
-                    <a href="login.html"><b>Login</b></a>
-                </li>
+        <li>
+          <a href="login.html"><b>Login</b></a>
+        </li>
 
-                <li>
-                    <a href="cadastro.html"><b>Cadastro</b></a>
-                </li>
+        <li>
+          <a href="cadastro.html"><b>Cadastro</b></a>
+        </li>
 
-            </ul>
+      </ul>
 
-        </div>
     </div>
+  </div>
 
 
   <!--header fim-->
@@ -204,7 +204,7 @@
 
 <script>
 
-function entrar() {
+  function entrar() {
 
     aguardar();
 
@@ -213,13 +213,13 @@ function entrar() {
 
     if (emailVar == "" || senhaVar == "") {
 
-        finalizarAguardar();
+      finalizarAguardar();
 
-        div_erros_login.classList.remove("conectando");
-        div_erros_login.style.display = "block";
-        div_erros_login.innerHTML = "Preencha todos os campos.";
+      div_erros_login.classList.remove("conectando");
+      div_erros_login.style.display = "block";
+      div_erros_login.innerHTML = "Preencha todos os campos.";
 
-        return false;
+      return false;
 
     }
 
@@ -232,83 +232,90 @@ function entrar() {
 
     fetch("/usuarios/autenticar", {
 
-        method: "POST",
+      method: "POST",
 
-        headers: {
+      headers: {
 
-            "Content-Type": "application/json"
+        "Content-Type": "application/json"
 
-        },
+      },
 
-        body: JSON.stringify({
+      body: JSON.stringify({
 
-            emailServer: emailVar,
+        emailServer: emailVar,
 
-            senhaServer: senhaVar
+        senhaServer: senhaVar
 
-        })
+      })
 
     }).then(function (resposta) {
 
-        console.log("ESTOU NO THEN DO entrar()!")
+      console.log("ESTOU NO THEN DO entrar()!")
 
-        if (resposta.ok) {
+      if (resposta.ok) {
 
-            console.log(resposta);
+        console.log(resposta);
 
-            resposta.json().then(json => {
+        resposta.json().then(json => {
 
-                console.log(json);
+          console.log(json);
 
-                console.log(JSON.stringify(json));
+          console.log(JSON.stringify(json));
 
-                sessionStorage.EMAIL_USUARIO = json.email;
+          sessionStorage.EMAIL_USUARIO = json.email;
 
-                sessionStorage.NOME_USUARIO = json.nome;
+          sessionStorage.NOME_USUARIO = json.nome;
 
-                sessionStorage.ID_USUARIO = json.id_usuario;
+          sessionStorage.ID_USUARIO = json.id_usuario;
 
-                setTimeout(function () {
+          sessionStorage.ID_EMPRESA = json.fk_empresa;
 
-                    window.location = "./dashboard/cardsAdmin.html";
 
-                }, 1000);
+          setTimeout(function () {
 
-            });
+            if (json.email.toLowerCase().includes("admin")) {
+              window.location = "./dashboard/cardsAdmin.html";
+            } else {
+              window.location = "./dashboard/cardsUser.html";
+            }
 
-        } else {
+          }, 1000);
 
-            console.log("Houve um erro ao tentar realizar o login!");
+        });
 
-            resposta.text().then(texto => {
+      } else {
 
-                console.error(texto);
+        console.log("Houve um erro ao tentar realizar o login!");
 
-                div_erros_login.classList.remove("conectando");
-                div_erros_login.style.display = "block";
-                div_erros_login.innerHTML = texto;
+        resposta.text().then(texto => {
 
-                finalizarAguardar();
+          console.error(texto);
 
-            });
+          div_erros_login.classList.remove("conectando");
+          div_erros_login.style.display = "block";
+          div_erros_login.innerHTML = texto;
 
-        }
+          finalizarAguardar();
+
+        });
+
+      }
 
     }).catch(function (erro) {
 
-        console.log(erro);
+      console.log(erro);
 
-        div_erros_login.classList.remove("conectando");
-        div_erros_login.style.display = "block";
-        div_erros_login.innerHTML = "Erro ao conectar com o servidor.";
+      div_erros_login.classList.remove("conectando");
+      div_erros_login.style.display = "block";
+      div_erros_login.innerHTML = "Erro ao conectar com o servidor.";
 
-        finalizarAguardar();
+      finalizarAguardar();
 
     })
 
     return false;
 
-}
+  }
 
 
 

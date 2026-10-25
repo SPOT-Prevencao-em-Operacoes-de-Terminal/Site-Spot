@@ -25,4 +25,10 @@ router.delete("/excluir/:idUsuario", function (req, res) {
     usuarioController.excluirUsuario(req, res);
 });
 
+
+router.post("/ativar", function (req, res) {
+    usuarioController.ativar(req, res);
+});
+
+
 module.exports = router;

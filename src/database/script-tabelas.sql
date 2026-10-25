@@ -29,7 +29,7 @@ CREATE TABLE usuario (
 
 CREATE TABLE codigo_autenticacao (
     id_codigo INT AUTO_INCREMENT PRIMARY KEY,
-    codigo VARCHAR(100),
+    codigo CHAR(6),
     data_criacao DATETIME,
     data_vencimento DATETIME,
     status VARCHAR(20),

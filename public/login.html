@@ -44,7 +44,7 @@
       <li><a href="como-funciona.html"><b>Como funciona</b></a></li>
       <li class="separador">|</li>
       <li class="agora"><a href="login.html"><b>Login</b></a></li>
-      <li><a href="cadastro.html"><b>Cadastro</b></a></li>
+      <li><a href="index.html#footer-contato"><b>Cadastro</b></a></li>
     </ul>
 
   </div>
@@ -56,36 +56,154 @@
 
   <div id="div_aguardar" style="display: none;"></div>
 
-  <div class="login-card">
+  
+<div class="login-card">
 
-    <h2>Conecte-se</h2>
-    <p class="login-sub">Acesse o painel de monitoramento do seu terminal.</p>
+  <div class="formulario-trilho" id="formulario_trilho">
 
-    <form class="form-login" onsubmit="return entrar()">
+    <!-- FORMULÁRIO DE LOGIN -->
+    <section class="painel-formulario">
 
-      <div class="campo">
-        <input type="email" id="email_input" class="input-email"
-          placeholder="E-mail corporativo" autocomplete="username" required>
-      </div>
+      <h2>Conecte-se</h2>
+      <p class="login-sub">
+        Acesse o painel de monitoramento do seu terminal.
+      </p>
 
-      <div class="campo">
-        <input type="password" id="senha_input" class="input-senha"
-          placeholder="Senha" autocomplete="current-password" required>
-        <button type="button" class="btn-olho" onclick="mostrarSenha()"
-          aria-label="Mostrar senha"></button>
-      </div>
+      <form class="form-login" onsubmit="return entrar()">
 
-      <button type="submit">Conectar</button>
+        <div class="campo">
+          <input type="email" id="email_input" class="input-email"
+            placeholder="E-mail corporativo"
+            autocomplete="username" required>
+        </div>
 
-      <div id="div_erros_login"></div>
+        <div class="campo">
+          <input type="password" id="senha_input" class="input-senha"
+            placeholder="Senha"
+            autocomplete="current-password" required>
 
+          <button type="button" class="btn-olho"
+            onclick="mostrarSenha()"
+            aria-label="Mostrar senha"></button>
+        </div>
+
+        <button type="submit">Conectar</button>
+
+        <div id="div_erros_login"></div>
+
+      </form>
+
+      <p class="form-texto-redirecionamento">
+        Primeiro acesso?
+        <a href="#" onclick="mostrarAtivacao(); return false;">
+          Ative sua conta
+        </a>
+      </p>
+
+    </section>
+
+
+<!-- FORMULÁRIO DE ATIVAÇÃO -->
+<section class="painel-formulario">
+    <h2>Ative sua conta</h2>
+    <p class="login-sub">Prepare seu acesso ao SPOT.</p>
+
+    <form class="form-login" onsubmit="return mostrarPopupCodigo()">
+        <div class="campo">
+            <input type="email" id="email_ativacao"
+                class="input-email"
+                placeholder="E-mail corporativo"
+                autocomplete="email" required>
+        </div>
+
+        <div class="campo">
+            <input type="password" id="senha_ativacao"
+                class="input-senha"
+                placeholder="Crie sua senha"
+                minlength="8" autocomplete="new-password" required>
+        </div>
+
+        <div class="campo">
+            <input type="password" id="confirmacao_senha"
+                class="input-senha"
+                placeholder="Confirme sua senha"
+                minlength="8" autocomplete="new-password" required>
+        </div>
+
+        <div id="div_erro_form_ativacao"></div>
+
+
+        <button type="submit">Continuar</button>
     </form>
 
     <p class="form-texto-redirecionamento">
-      Ainda não tem conta? <a href="index.html#footer-contato">Faça o cadastro</a>
+        Já tem uma conta?
+        <a href="#" onclick="mostrarLogin(); return false;">
+            Voltar para o login
+        </a>
     </p>
+</section>
+
 
   </div>
+
+</div>
+
+
+<!-- POP-UP DE AUTENTICAÇÃO -->
+<div id="popup_codigo" class="popup-fundo">
+    <div class="popup-codigo">
+        <button type="button" class="popup-fechar"
+            onclick="fecharPopupCodigo()" aria-label="Fechar">
+            &times;
+        </button>
+
+        <div class="icone-codigo">
+            <span>&#128274;</span>
+        </div>
+
+        <h2>Verifique seu acesso</h2>
+
+        <p>
+            Digite o código de 6 caracteres fornecido
+            pelo gestor da sua empresa.
+        </p>
+
+        <div class="campos-codigo">
+            <input class="digito-codigo" maxlength="1"
+                aria-label="Caractere 1" oninput="avancarCodigo(0)"
+                onkeydown="apagarCodigo(event, 0)" onpaste="colarCodigo(event)">
+            <input class="digito-codigo" maxlength="1"
+                aria-label="Caractere 2" oninput="avancarCodigo(1)"
+                onkeydown="apagarCodigo(event, 1)">
+            <input class="digito-codigo" maxlength="1"
+                aria-label="Caractere 3" oninput="avancarCodigo(2)"
+                onkeydown="apagarCodigo(event, 2)">
+            <input class="digito-codigo" maxlength="1"
+                aria-label="Caractere 4" oninput="avancarCodigo(3)"
+                onkeydown="apagarCodigo(event, 3)">
+            <input class="digito-codigo" maxlength="1"
+                aria-label="Caractere 5" oninput="avancarCodigo(4)"
+                onkeydown="apagarCodigo(event, 4)">
+            <input class="digito-codigo" maxlength="1"
+                aria-label="Caractere 6" oninput="avancarCodigo(5)"
+                onkeydown="apagarCodigo(event, 5)">
+        </div>
+
+<div id="div_mensagem_ativacao"></div>
+        <button type="button" class="btn-confirmar-codigo"
+            onclick="confirmarAtivacao()">
+            Confirmar código
+        </button>
+
+        <button type="button" class="btn-voltar-codigo"
+            onclick="fecharPopupCodigo()">
+            Voltar
+        </button>
+    </div>
+</div>
+
+
 
 </div>
 
@@ -312,6 +430,194 @@
     mostrando ? "Mostrar senha" : "Ocultar senha"
   );
 }
+
+
+function mostrarAtivacao() {
+    document.getElementById("formulario_trilho")
+        .classList.add("mostrar-ativacao");
+
+    var mensagem = document.getElementById("div_erro_form_ativacao");
+    mensagem.className = "";
+    mensagem.innerHTML = "";
+}
+
+function mostrarLogin() {
+    document.getElementById("formulario_trilho")
+        .classList.remove("mostrar-ativacao");
+
+    var mensagem = document.getElementById("div_erro_form_ativacao");
+    mensagem.className = "";
+    mensagem.innerHTML = "";
+}
+
+
+
+function mostrarPopupCodigo() {
+    var email = document.getElementById("email_ativacao").value.trim();
+    var senha = document.getElementById("senha_ativacao").value;
+    var confirmacao = document.getElementById("confirmacao_senha").value;
+var mensagem = document.getElementById("div_erro_form_ativacao");
+
+    mensagem.className = "";
+    mensagem.innerHTML = "";
+
+    if (email == "") {
+        mensagem.className = "visivel erro";
+        mensagem.innerHTML = "Informe seu e-mail corporativo.";
+        return false;
+    }
+
+    if (senha.length < 8) {
+        mensagem.className = "visivel erro";
+        mensagem.innerHTML = "A senha deve ter pelo menos 8 caracteres.";
+        return false;
+    }
+
+    if (senha != confirmacao) {
+        mensagem.className = "visivel erro";
+        mensagem.innerHTML = "As senhas não coincidem.";
+        return false;
+    }
+
+    
+
+if (!/[!@#$%&*]/.test(senha)) {
+    mensagem.className = "visivel erro";
+    mensagem.innerHTML = "A senha deve conter pelo menos um caractere especial, como @, !, # ou $.";
+    return false;
+}
+
+
+
+    document.getElementById("popup_codigo").classList.add("visivel");
+    document.querySelector(".digito-codigo").focus();
+
+    return false;
+}
+
+function fecharPopupCodigo() {
+    document.getElementById("popup_codigo").classList.remove("visivel");
+}
+
+function avancarCodigo(indice) {
+    var campos = document.querySelectorAll(".digito-codigo");
+    campos[indice].value = campos[indice].value
+        .replace(/[^a-zA-Z0-9]/g, "")
+        .toUpperCase()
+        .slice(-1);
+
+    if (campos[indice].value != "" && indice < 5) {
+        campos[indice + 1].focus();
+    }
+}
+
+function apagarCodigo(evento, indice) {
+    var campos = document.querySelectorAll(".digito-codigo");
+
+    if (evento.key == "Backspace" && campos[indice].value == "" && indice > 0) {
+        campos[indice - 1].focus();
+    }
+
+    if (evento.key == "ArrowLeft" && indice > 0) {
+        campos[indice - 1].focus();
+    }
+
+    if (evento.key == "ArrowRight" && indice < 5) {
+        campos[indice + 1].focus();
+    }
+}
+
+function colarCodigo(evento) {
+    evento.preventDefault();
+
+    var codigo = evento.clipboardData.getData("text")
+        .replace(/[^a-zA-Z0-9]/g, "")
+        .toUpperCase()
+        .slice(0, 6);
+
+    var campos = document.querySelectorAll(".digito-codigo");
+
+    for (var i = 0; i < codigo.length; i++) {
+        campos[i].value = codigo[i];
+    }
+
+    if (codigo.length < 6) {
+        campos[codigo.length].focus();
+    } else {
+        campos[5].focus();
+    }
+}
+
+function confirmarAtivacao() {
+    var campos = document.querySelectorAll(".digito-codigo");
+    var codigo = "";
+    var mensagem = document.getElementById("div_mensagem_ativacao");
+
+    for (var i = 0; i < campos.length; i++) {
+        codigo += campos[i].value;
+    }
+
+    if (codigo.length != 6) {
+        mensagem.className = "visivel erro";
+        mensagem.innerHTML = "Digite os 6 caracteres do código.";
+        return;
+    }
+
+    var email = document.getElementById("email_ativacao").value.trim();
+    var senha = document.getElementById("senha_ativacao").value;
+    var confirmacao = document.getElementById("confirmacao_senha").value;
+
+    mensagem.className = "visivel";
+    mensagem.innerHTML = "Validando seus dados...";
+
+    fetch("/usuarios/ativar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            emailServer: email,
+            codigoServer: codigo,
+            senhaServer: senha,
+            confirmacaoSenhaServer: confirmacao
+        })
+    })
+        .then(function (resposta) {
+            if (resposta.ok) {
+                mensagem.className = "visivel sucesso";
+                mensagem.innerHTML = "Conta ativada! Você já pode entrar.";
+
+                document.getElementById("email_input").value = email;
+                document.getElementById("senha_input").value = "";
+
+                document.getElementById("senha_ativacao").value = "";
+                document.getElementById("confirmacao_senha").value = "";
+
+                setTimeout(function () {
+                    fecharPopupCodigo();
+                    mostrarLogin();
+
+                    for (var i = 0; i < campos.length; i++) {
+                        campos[i].value = "";
+                    }
+
+                    mensagem.className = "";
+                    mensagem.innerHTML = "";
+                }, 1500);
+            } else {
+                resposta.text().then(function (texto) {
+                    mensagem.className = "visivel erro";
+                    mensagem.innerHTML = texto || "Não foi possível ativar a conta.";
+                });
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            mensagem.className = "visivel erro";
+            mensagem.innerHTML = "Erro ao conectar com o servidor.";
+        });
+}
+
 
 
 

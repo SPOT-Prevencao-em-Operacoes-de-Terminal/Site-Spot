@@ -9,51 +9,40 @@ function autenticar(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
-
         usuarioModel.autenticar(email, senha)
             .then(
                 function (resultadoAutenticar) {
-                    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
-                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
+                    console.log("Resultados encontrados: " + resultadoAutenticar.length);
 
                     if (resultadoAutenticar.length == 1) {
-                        console.log(resultadoAutenticar);
-
                         res.json({
                             id_usuario: resultadoAutenticar[0].id_usuario,
                             email: resultadoAutenticar[0].email,
                             nome: resultadoAutenticar[0].nome,
-                            senha: resultadoAutenticar[0].senha,
+                            cargo: resultadoAutenticar[0].cargo,
                             fk_empresa: resultadoAutenticar[0].fk_empresa
                         });
-
-                    } else if (resultadoAutenticar.length == 0) {
-                        res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
-                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                        res.status(403).send("Email e/ou senha inválido(s)");
                     }
                 }
             ).catch(
                 function (erro) {
                     console.log(erro);
-                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    console.log("Houve um erro ao realizar o login!", erro.sqlMessage);
                     res.status(500).json(erro.sqlMessage);
                 }
             );
     }
-
 }
 
 function cadastrar(req, res) {
-    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
     var cargo = req.body.cargoServer;
     var cpf = req.body.cpfServer;
-    var senha = req.body.senhaServer;
     var fkEmpresa = req.body.idEmpresaVincularServer;
 
-    // Faça as validações dos valores
     if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
     } else if (email == undefined) {
@@ -62,31 +51,23 @@ function cadastrar(req, res) {
         res.status(400).send("Seu cargo está undefined!");
     } else if (cpf == undefined) {
         res.status(400).send("Seu CPF está undefined!");
-    } else if (senha == undefined) {
-        res.status(400).send("Sua senha está undefined!");
     } else if (fkEmpresa == undefined) {
         res.status(400).send("Sua empresa a vincular está undefined!");
     } else {
-
-        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, cargo, cpf, email, senha, fkEmpresa)
+        usuarioModel.cadastrar(nome, cargo, cpf, email, fkEmpresa)
             .then(
                 function (resultado) {
-                    res.json(resultado);
+                    res.status(201).json(resultado);
                 }
             ).catch(
                 function (erro) {
                     console.log(erro);
-                    console.log(
-                        "\nHouve um erro ao realizar o cadastro! Erro: ",
-                        erro.sqlMessage
-                    );
+                    console.log("Houve um erro ao realizar o cadastro!", erro.sqlMessage);
                     res.status(500).json(erro.sqlMessage);
                 }
             );
     }
 }
-
 
 function listarPorEmpresa(req, res) {
     var idEmpresa = Number(req.params.idEmpresa);
@@ -98,17 +79,19 @@ function listarPorEmpresa(req, res) {
     }
 
     usuarioModel.listarPorEmpresa(idEmpresa)
-        .then(function (resultado) {
-            res.status(200).json(resultado);
-        })
-        .catch(function (erro) {
-            console.log("Erro ao listar usuários:", erro);
-            res.status(500).json({
-                mensagem: "Não foi possível listar os usuários."
-            });
-        });
+        .then(
+            function (resultado) {
+                res.status(200).json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log("Erro ao listar usuários:", erro);
+                res.status(500).json({
+                    mensagem: "Não foi possível listar os usuários."
+                });
+            }
+        );
 }
-
 
 function atualizarUsuario(req, res) {
     var idUsuario = Number(req.params.idUsuario);
@@ -134,17 +117,20 @@ function atualizarUsuario(req, res) {
         email.trim(),
         idEmpresa
     )
-        .then(function () {
-            res.status(200).json({
-                mensagem: "Usuário atualizado com sucesso."
-            });
-        })
-        .catch(function (erro) {
-            console.log("Erro ao atualizar usuário:", erro);
-            res.status(500).json({
-                mensagem: "Não foi possível atualizar o usuário."
-            });
-        });
+        .then(
+            function () {
+                res.status(200).json({
+                    mensagem: "Usuário atualizado com sucesso."
+                });
+            }
+        ).catch(
+            function (erro) {
+                console.log("Erro ao atualizar usuário:", erro);
+                res.status(500).json({
+                    mensagem: "Não foi possível atualizar o usuário."
+                });
+            }
+        );
 }
 
 function excluirUsuario(req, res) {
@@ -161,29 +147,75 @@ function excluirUsuario(req, res) {
     }
 
     usuarioModel.excluirUsuario(idUsuario, idEmpresa)
-        .then(function (resultado) {
-            if (resultado.affectedRows === 0) {
-                return res.status(404).json({
-                    mensagem: "Usuário não encontrado nesta empresa."
+        .then(
+            function (resultado) {
+                if (resultado.affectedRows === 0) {
+                    return res.status(404).json({
+                        mensagem: "Usuário não encontrado nesta empresa."
+                    });
+                }
+
+                res.status(200).json({
+                    mensagem: "Usuário desativado com sucesso."
                 });
             }
+        ).catch(
+            function (erro) {
+                console.log("Erro ao desativar usuário:", erro);
+                res.status(500).json({
+                    mensagem: "Não foi possível desativar o usuário."
+                });
+            }
+        );
+}
 
-            res.status(200).json({
-                mensagem: "Usuário excluído com sucesso."
-            });
+
+function ativar(req, res) {
+    var email = req.body.emailServer;
+    var codigo = req.body.codigoServer;
+    var senha = req.body.senhaServer;
+    var confirmacao = req.body.confirmacaoSenhaServer;
+
+    if (!email || !codigo || !senha || !confirmacao) {
+        return res.status(400).send("Preencha todos os campos.");
+    }
+
+    if (codigo.length !== 6) {
+        return res.status(400).send("Digite os 6 caracteres do código.");
+    }
+
+    if (senha.length < 8 || !/[!@#$%&*]/.test(senha)) {
+        return res.status(400).send(
+            "A senha deve ter pelo menos 8 caracteres e um caractere especial."
+        );
+    }
+
+    if (senha !== confirmacao) {
+        return res.status(400).send("As senhas não coincidem.");
+    }
+
+    usuarioModel.ativar(email.trim(), codigo.toUpperCase(), senha)
+        .then(function (resultado) {
+            if (!resultado) {
+                return res.status(400).send(
+                    "E-mail ou código inválido, expirado ou conta já ativada."
+                );
+            }
+
+            res.status(200).send("Conta ativada com sucesso!");
         })
         .catch(function (erro) {
-            console.log("Erro ao excluir usuário:", erro);
-            res.status(500).json({
-                mensagem: "Não foi possível excluir o usuário."
-            });
+            console.log("Erro ao ativar usuário:", erro);
+            res.status(500).send("Não foi possível ativar a conta.");
         });
 }
+
 
 module.exports = {
     autenticar,
     cadastrar,
     listarPorEmpresa,
     atualizarUsuario,
-    excluirUsuario
+    excluirUsuario,
+    ativar
 };

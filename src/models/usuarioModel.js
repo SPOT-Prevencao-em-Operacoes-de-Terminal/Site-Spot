@@ -148,6 +148,25 @@ function ativar(email, codigo, senha) {
         });
 }
 
+function gerarCodigo(codigo, idEmpresa) {
+    var instrucaoSql = `
+        UPDATE codigo_autenticacao
+        SET status = 'Inativo'
+        WHERE fk_empresa = ? AND status = 'Ativo';
+    `;
+
+    return database.executar(instrucaoSql, [idEmpresa])
+        .then(function () {
+            var instrucaoSql = `
+                INSERT INTO codigo_autenticacao
+                    (codigo, data_criacao, data_vencimento, status, fk_empresa)
+                VALUES (?, NOW(), DATE_ADD(NOW(), INTERVAL 30 MINUTE), 'Ativo', ?);
+            `;
+
+            return database.executar(instrucaoSql, [codigo, idEmpresa]);
+        });
+}
+
 
 module.exports = {
     autenticar,
@@ -155,5 +174,6 @@ module.exports = {
     listarPorEmpresa,
     atualizarUsuario,
     excluirUsuario,
-    ativar
+    ativar,
+    gerarCodigo
 };

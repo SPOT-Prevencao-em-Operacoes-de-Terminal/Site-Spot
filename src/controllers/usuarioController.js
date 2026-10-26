@@ -210,6 +210,34 @@ function ativar(req, res) {
         });
 }
 
+function gerarCodigo(req, res) {
+    var idEmpresa = Number(req.body.idEmpresa);
+
+    if (!Number.isInteger(idEmpresa) || idEmpresa <= 0) {
+        return res.status(400).send("Empresa inválida.");
+    }
+
+    var caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    var codigo = "";
+
+    for (var i = 0; i < 6; i++) {
+        codigo += caracteres.charAt(
+            Math.floor(Math.random() * caracteres.length)
+        );
+    }
+
+    usuarioModel.gerarCodigo(codigo, idEmpresa)
+        .then(function () {
+            res.status(201).json({
+                codigo: codigo
+            });
+        })
+        .catch(function (erro) {
+            console.log("Erro ao gerar código:", erro);
+            res.status(500).send("Não foi possível gerar o código.");
+        });
+}
+
 
 module.exports = {
     autenticar,
@@ -217,5 +245,6 @@ module.exports = {
     listarPorEmpresa,
     atualizarUsuario,
     excluirUsuario,
-    ativar
+    ativar,
+    gerarCodigo
 };

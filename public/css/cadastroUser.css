@@ -481,3 +481,139 @@
 .botao-ok-usuario:hover {
     background-color: #E2E8F0;
 }
+
+/* Card de código de ativação */
+.painel-lateral-cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
+
+.painel-codigo-ativacao {
+    padding: 24px;
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.cabecalho-codigo-ativacao {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.icone-codigo-ativacao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background-color: #EAF1FA;
+    color: #0A2540;
+    font-size: 19px;
+}
+
+.cabecalho-codigo-ativacao h2 {
+    margin-bottom: 5px;
+    color: #0A2540;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.cabecalho-codigo-ativacao p,
+.descricao-codigo-ativacao {
+    color: #64748B;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.conteudo-codigo-ativacao label {
+    display: block;
+    margin-bottom: 8px;
+    color: #475569;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.campo-codigo-ativacao {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.campo-codigo-ativacao input {
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid #D9E0E8;
+    border-radius: 7px;
+    background-color: #F8FAFC;
+    color: #0A2540;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-align: center;
+}
+
+.campo-codigo-ativacao button {
+    width: 46px;
+    flex-shrink: 0;
+    border: 1px solid #D9E0E8;
+    border-radius: 7px;
+    background-color: #FFFFFF;
+    color: #0A2540;
+    cursor: pointer;
+}
+
+.campo-codigo-ativacao button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.botao-gerar-codigo {
+    width: 100%;
+    min-height: 42px;
+    margin-bottom: 12px;
+    border: none;
+    border-radius: 7px;
+    background-color: #0A2540;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.botao-gerar-codigo:hover {
+    background-color: #123B60;
+}
+
+.descricao-codigo-ativacao {
+    margin: 0;
+}
+
+#mensagem_codigo_ativacao {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+
+.status-usuario {
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748B;
+    margin-top: 4px;
+}
+
+.status-usuario:where(:not(:empty)) {
+    width: fit-content;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background-color: #F1F5F9;
+}

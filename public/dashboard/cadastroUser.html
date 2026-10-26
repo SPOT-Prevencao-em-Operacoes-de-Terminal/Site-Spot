@@ -21,7 +21,7 @@
   <script src="../js/alerta.js" defer></script>
 </head>
 
-<body onload="listar(); listarUsuarios()">
+<body onload="listarUsuarios()">
   <div class="layout-aplicacao">
 
     <aside class="barra-lateral">
@@ -103,53 +103,93 @@
 
         </section>
 
-        <section class="painel-formulario-usuario">
+        <div class="painel-lateral-cadastro">
 
-          <div class="formulario-usuario">
+          <section class="painel-codigo-ativacao">
 
-            <h2>Cadastrar novo usuário</h2>
-
-            <p class="descricao-formulario-usuario">
-              Adicione os usuários que terão acesso à plataforma SPOT.
-              Informe os dados do colaborador para permitir que ele
-              realize o login e acesse a dashboard.
-            </p>
-
-            <form class="form-contato" onsubmit="return cadastrar()">
-
-              <input type="text" id="nome_input" placeholder="Nome" required>
-
-              <select id="cargo_input" required>
-                <option value="" disabled selected hidden>Selecione o cargo</option>
-                <option value="Analista de TI">Analista de TI</option>
-                <option value="Gestor de TI">Gestor(a) de TI</option>
-              </select>
-
-              <input type="text" id="cpf_input" placeholder="CPF" maxlength="11" required inputmode="numeric">
-
-              <input type="email" id="email_input" placeholder="E-mail" required>
-
-              <input type="text" id="codigo_input" placeholder="Código da Empresa" required>
-
-              <input type="password" id="senha_input" placeholder="Senha" required>
-
-              <input type="password" id="confirmacao_senha_input" placeholder="Confirmar Senha" required>
-
-              <button type="submit">CADASTRAR</button>
-
-              <div class="alerta_erro">
-                <div class="card_erro" id="cardErro">
-                  <span id="mensagem_erro"></span>
-                </div>
+            <div class="cabecalho-codigo-ativacao">
+              <div class="icone-codigo-ativacao">
+                <i class="fa-solid fa-key"></i>
               </div>
 
-            </form>
+              <div>
+                <h2>Código de ativação</h2>
+                <p>Gere um código para os colaboradores da sua empresa.</p>
+              </div>
+            </div>
 
-            <div id="div_erros_login"></div>
+            <div class="conteudo-codigo-ativacao">
+              <label for="codigo_gerado">Código da empresa</label>
 
-          </div>
+              <div class="campo-codigo-ativacao">
+                <input type="text" id="codigo_gerado" placeholder="Gere um código" readonly>
 
-        </section>
+                <button type="button" id="botao_copiar_codigo" onclick="copiarCodigo()" title="Copiar código" disabled>
+                  <i class="fa-regular fa-copy"></i>
+                </button>
+              </div>
+
+              <button type="button" class="botao-gerar-codigo" id="botao_gerar_codigo" onclick="gerarCodigo()">
+                <i class="fa-solid fa-rotate"></i>
+                GERAR CÓDIGO
+              </button>
+
+              <p class="descricao-codigo-ativacao">
+                Compartilhe o código com os colaboradores cadastrados da sua empresa.
+              </p>
+
+              <div id="mensagem_codigo_ativacao"></div>
+            </div>
+
+          </section>
+
+          <section class="painel-formulario-usuario">
+
+            <div class="formulario-usuario">
+
+              <h2>Cadastrar novo usuário</h2>
+
+              <p class="descricao-formulario-usuario">
+                Adicione os usuários que terão acesso à plataforma SPOT.
+                Informe os dados do colaborador para permitir que ele
+                realize o login e acesse a dashboard.
+              </p>
+
+
+              <form class="form-contato" onsubmit="return cadastrar()">
+
+                <input type="text" id="nome_input" placeholder="Nome" required>
+
+                <select id="cargo_input" required>
+                  <option value="" disabled selected hidden>Selecione o cargo</option>
+                  <option value="Analista de TI">Analista de TI</option>
+                  <option value="Gestor de TI">Gestor(a) de TI</option>
+                </select>
+
+                <input type="text" id="cpf_input" placeholder="CPF" maxlength="11" required inputmode="numeric">
+
+                <input type="email" id="email_input" placeholder="E-mail" required>
+
+                <button type="submit">CADASTRAR</button>
+
+                <div class="alerta_erro">
+                  <div class="card_erro" id="cardErro">
+                    <span id="mensagem_erro"></span>
+                  </div>
+                </div>
+
+              </form>
+
+              <div id="div_erros_login"></div>
+
+
+              <div id="div_erros_login"></div>
+
+            </div>
+
+          </section>
+
+        </div>
 
       </div>
 
@@ -185,163 +225,142 @@
         // Array para armazenar empresas cadastradas para validação de código de ativação 
         let listaEmpresasCadastradas = [];
 
+
         function cadastrar() {
-          // aguardar();
+          var nomeVar = document.getElementById("nome_input").value.trim();
+          var emailVar = document.getElementById("email_input").value.trim();
+          var cargoVar = document.getElementById("cargo_input").value;
+          var cpfVar = document.getElementById("cpf_input").value.trim();
+          var idEmpresaVincular = sessionStorage.ID_EMPRESA;
 
-          //Recupere o valor da nova input pelo nome do id
-          // Agora vá para o método fetch logo abaixo
-          var nomeVar = nome_input.value;
-          var emailVar = email_input.value;
-          var cargoVar = cargo_input.value;
-          var cpfVar = cpf_input.value;
-          var senhaVar = senha_input.value;
-          var confirmacaoSenhaVar = confirmacao_senha_input.value;
-          var codigoVar = codigo_input.value;
-          var idEmpresaVincular
-
-          // Verificando se há algum campo em branco
-          if (
-            nomeVar == "" ||
-            emailVar == "" ||
-            cargoVar == "" ||
-            cpfVar == "" ||
-            senhaVar == "" ||
-            confirmacaoSenhaVar == "" ||
-            codigoVar == ""
-          ) {
+          if (nomeVar == "" || emailVar == "" || cargoVar == "" || cpfVar == "") {
             cardErro.style.display = "block";
-            mensagem_erro.innerHTML =
-              "(Mensagem de erro para todos os campos em branco)";
-
-            finalizarAguardar();
+            mensagem_erro.innerHTML = "Preencha todos os campos.";
+            setTimeout(sumirMensagem, 5000);
             return false;
-          } else {
-            setInterval(sumirMensagem, 5000);
           }
 
           if (cpfVar.length != 11 || isNaN(cpfVar)) {
-
             cardErro.style.display = "block";
-
-            mensagem_erro.innerHTML =
-              "O CPF deve possuir 11 números.";
-
+            mensagem_erro.innerHTML = "O CPF deve possuir 11 números.";
             setTimeout(sumirMensagem, 5000);
-
             return false;
           }
 
           if (!emailVar.includes("@")) {
-
             cardErro.style.display = "block";
-
-            mensagem_erro.innerHTML =
-              "Informe um e-mail válido.";
-
-            setTimeout(sumirMensagem, 5000); return false;
-          }
-
-          if (senhaVar.length < 8) {
-
-            cardErro.style.display = "block";
-
-            mensagem_erro.innerHTML =
-              "A senha deve possuir pelo menos 8 caracteres.";
-
-            setTimeout(sumirMensagem, 5000);
-
-            return false;
-          }
-
-          if (senhaVar != confirmacaoSenhaVar) {
-
-            cardErro.style.display = "block";
-
-            mensagem_erro.innerHTML =
-              "As senhas não coincidem.";
-
-            setTimeout(sumirMensagem, 5000); return false;
-          }
-
-          // Verificando se o código de ativação é de alguma empresa cadastrada
-          for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-
-            if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-
-              idEmpresaVincular = listaEmpresasCadastradas[i].id_empresa;
-
-              console.log("Código de ativação válido.");
-
-              break;
-            }
-          }
-
-          if (idEmpresaVincular == undefined) {
-
-            cardErro.style.display = "block";
-
-            mensagem_erro.innerHTML =
-              "Código da empresa inválido.";
-
-            setTimeout(sumirMensagem, 5000);
-
-            return false;
-          }
-
-          if (String(idEmpresaVincular) !== String(sessionStorage.ID_EMPRESA)) {
-            cardErro.style.display = "block";
-            mensagem_erro.textContent =
-              "O código informado não corresponde à sua empresa.";
-
+            mensagem_erro.innerHTML = "Informe um e-mail válido.";
             setTimeout(sumirMensagem, 5000);
             return false;
           }
 
-          // Enviando o valor da nova input
           fetch("/usuarios/cadastrar", {
             method: "POST",
             headers: {
-              "Content-Type": "application/json",
+              "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              // crie um atributo que recebe o valor recuperado aqui
-              // Agora vá para o arquivo routes/usuario.js
               nomeServer: nomeVar,
               emailServer: emailVar,
               cargoServer: cargoVar,
               cpfServer: cpfVar,
-              senhaServer: senhaVar,
               idEmpresaVincularServer: idEmpresaVincular
-            }),
+            })
           })
             .then(function (resposta) {
-              console.log("resposta: ", resposta);
-
-
               if (resposta.ok) {
                 cardErro.classList.add("card_sucesso");
-
-                mensagem_erro.textContent =
-                  "Usuário cadastrado com sucesso!";
-
+                mensagem_erro.textContent = "Usuário cadastrado com sucesso!";
                 cardErro.style.display = "block";
 
                 document.querySelector(".form-contato").reset();
-
                 listarUsuarios();
 
                 setTimeout(sumirMensagem, 5000);
               } else {
-                throw new Error("Houve um erro ao tentar realizar o cadastro!");
+                return resposta.text().then(function (mensagem) {
+                  throw new Error(mensagem || "Não foi possível cadastrar o usuário.");
+                });
               }
             })
-            .catch(function (resposta) {
-              console.log(`#ERRO: ${resposta}`);
-              finalizarAguardar();
+            .catch(function (erro) {
+              console.log("Erro ao cadastrar usuário:", erro);
+              cardErro.classList.remove("card_sucesso");
+              mensagem_erro.textContent = erro.message;
+              cardErro.style.display = "block";
+              setTimeout(sumirMensagem, 5000);
             });
 
           return false;
         }
+
+        function gerarCodigo() {
+          var idEmpresa = sessionStorage.ID_EMPRESA;
+          var mensagem = document.getElementById("mensagem_codigo_ativacao");
+          var campoCodigo = document.getElementById("codigo_gerado");
+          var botaoCopiar = document.getElementById("botao_copiar_codigo");
+
+          if (!idEmpresa) {
+            mensagem.style.color = "#b30000";
+            mensagem.textContent = "Empresa não encontrada. Faça login novamente.";
+            return;
+          }
+
+          mensagem.style.color = "#64748B";
+          mensagem.textContent = "Gerando código...";
+
+          fetch("/usuarios/gerar-codigo", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              idEmpresa: idEmpresa
+            })
+          })
+            .then(function (resposta) {
+              if (!resposta.ok) {
+                return resposta.text().then(function (texto) {
+                  throw new Error(texto || "Não foi possível gerar o código.");
+                });
+              }
+
+              return resposta.json();
+            })
+            .then(function (resultado) {
+              campoCodigo.value = resultado.codigo;
+              botaoCopiar.disabled = false;
+
+              mensagem.style.color = "#237a3b";
+              mensagem.textContent = "Código gerado com sucesso!";
+            })
+            .catch(function (erro) {
+              console.log("Erro ao gerar código:", erro);
+              mensagem.style.color = "#b30000";
+              mensagem.textContent = erro.message;
+            });
+        }
+
+        function copiarCodigo() {
+          var codigo = document.getElementById("codigo_gerado").value;
+          var mensagem = document.getElementById("mensagem_codigo_ativacao");
+
+          if (!codigo) {
+            return;
+          }
+
+          navigator.clipboard.writeText(codigo)
+            .then(function () {
+              mensagem.style.color = "#237a3b";
+              mensagem.textContent = "Código copiado!";
+            })
+            .catch(function (erro) {
+              console.log("Erro ao copiar código:", erro);
+              mensagem.style.color = "#b30000";
+              mensagem.textContent = "Não foi possível copiar o código.";
+            });
+        }
+
 
         // Listando empresas cadastradas 
         function listar() {
@@ -508,9 +527,14 @@
                 email.className = "email-usuario-cadastrado";
                 email.textContent = usuario.email;
 
+                var status = document.createElement("span");
+                status.className = "status-usuario";
+                status.textContent = usuario.status;
 
                 dados.appendChild(nome);
                 dados.appendChild(email);
+                dados.appendChild(status);
+
 
                 var botaoEditar = document.createElement("button");
                 botaoEditar.type = "button";
@@ -539,21 +563,21 @@
         var usuarioParaExcluir = null;
 
         function abrirEdicaoUsuario(id, nomeAtual, emailAtual) {
-    if (usuarioEmEdicao !== null) {
-        listarUsuarios();
-    }
+          if (usuarioEmEdicao !== null) {
+            listarUsuarios();
+          }
 
-    usuarioEmEdicao = id;
+          usuarioEmEdicao = id;
 
-    var card = document.querySelector(
-        '.item-usuario-cadastrado[data-id-usuario="' + id + '"]'
-    );
+          var card = document.querySelector(
+            '.item-usuario-cadastrado[data-id-usuario="' + id + '"]'
+          );
 
-    if (!card) {
-        return;
-    }
+          if (!card) {
+            return;
+          }
 
-    card.innerHTML = `
+          card.innerHTML = `
         <div class="form-edicao-usuario">
             <label for="editar-nome-${id}">Nome</label>
             <input type="text" id="editar-nome-${id}" required>
@@ -578,17 +602,17 @@
         </div>
     `;
 
-    card.querySelector("#editar-nome-" + id).value = nomeAtual;
-    card.querySelector("#editar-email-" + id).value = emailAtual;
+          card.querySelector("#editar-nome-" + id).value = nomeAtual;
+          card.querySelector("#editar-email-" + id).value = emailAtual;
 
-    card.querySelector(".botao-excluir-usuario").onclick = function () {
-        abrirModalExclusao(id, nomeAtual);
-    };
+          card.querySelector(".botao-excluir-usuario").onclick = function () {
+            abrirModalExclusao(id, nomeAtual);
+          };
 
-    card.querySelector(".botao-salvar-usuario").onclick = function () {
-        salvarEdicaoUsuario(id);
-    };
-}
+          card.querySelector(".botao-salvar-usuario").onclick = function () {
+            salvarEdicaoUsuario(id);
+          };
+        }
 
         function salvarEdicaoUsuario(id) {
           var nome = document.getElementById("editar-nome-" + id).value.trim();
@@ -675,9 +699,9 @@
         }
 
         function fecharEdicaoUsuario() {
-    usuarioEmEdicao = null;
-    listarUsuarios();
-}
+          usuarioEmEdicao = null;
+          listarUsuarios();
+        }
       </script>
 </body>
 

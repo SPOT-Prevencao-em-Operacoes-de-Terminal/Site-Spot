@@ -30,5 +30,8 @@ router.post("/ativar", function (req, res) {
     usuarioController.ativar(req, res);
 });
 
+router.post("/gerar-codigo", function (req, res) {
+    usuarioController.gerarCodigo(req, res);
+});
 
 module.exports = router;

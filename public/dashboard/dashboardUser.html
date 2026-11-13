@@ -20,7 +20,7 @@
     <script src="../js/alerta.js" defer></script>
 </head>
 
-<body onload="inicializarDashboard()">
+<body onload="/*validarSessao();*/ inicializarDashboard()">
     <div class="layout-aplicacao">
 
         <aside class="barra-lateral">
@@ -29,17 +29,15 @@
             </div>
 
             <nav class="menu-lateral">
-                <div class="grupo-menu">
-                    <a href="./cardsUser.html" class="item-menu">
-                        <i class="fa-solid fa-chart-line"></i>
-                        <span>Visão Geral</span>
-                    </a>
-                    
-                    <a href="javascript:void(0)" class="item-menu" onclick="abrirModalHistorico()">
-                        <i class="fa-solid fa-clock"></i>
-                        <span>Histórico</span>
-                    </a>
-                </div>
+                <a href="cardsUser.html" class="item-menu">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Servidores</span>
+                </a>
+                
+                <a href="#" class="item-menu">
+                    <i class="fa-solid fa-server"></i>
+                    <span>Cadastrar Nova Máquina</span>
+                </a>
             </nav>
 
             <div class="rodape-lateral">
@@ -52,10 +50,10 @@
 
             <header class="cabecalho-superior">
                 <nav class="navegacao-cabecalho">
-                    <a href="cardsUser.html" class="aba-navegacao">
-                        <i class="fas fa-arrow-left"></i>
-                        <span>Voltar</span>
-                    </a>
+                    
+                    <a href="javascript:void(0)" class="aba-navegacao" onclick="abrirModalHistorico()">
+                        <i class="fa-solid fa-clock"></i>
+                        <span>Histórico</span></a>
                 </nav>
 
                 <div class="perfil-usuario">
@@ -88,7 +86,7 @@
                             </div>
                             <div class="container-etiqueta">
                                 <span class="etiqueta-estado etiqueta-normal" id="status-kpi-cpu">
-                                    <span class="ponto-etiqueta"></span> Normal
+                                    <i class="fa-solid fa-circle-info icone-info-etiqueta"></i> Normal
                                 </span>
                                 <div class="painel-tooltip-parametros">
                                     <span class="titulo-tooltip">Parâmetros CPU</span>
@@ -121,7 +119,7 @@
                             </div>
                             <div class="container-etiqueta">
                                 <span class="etiqueta-estado etiqueta-normal" id="status-kpi-ram">
-                                    <span class="ponto-etiqueta"></span> Normal
+                                    <i class="fa-solid fa-circle-info icone-info-etiqueta"></i> Normal
                                 </span>
                                 <div class="painel-tooltip-parametros">
                                     <span class="titulo-tooltip">Parâmetros RAM</span>
@@ -154,7 +152,7 @@
                             </div>
                             <div class="container-etiqueta">
                                 <span class="etiqueta-estado etiqueta-normal" id="status-kpi-disco">
-                                    <span class="ponto-etiqueta"></span> Normal
+                                    <i class="fa-solid fa-circle-info icone-info-etiqueta"></i> Normal
                                 </span>
                                 <div class="painel-tooltip-parametros">
                                     <span class="titulo-tooltip">Parâmetros Disco</span>
@@ -517,7 +515,7 @@
             if (elementoStatus) {
                 const statusInfo = calcularStatus(valor, limiteAtencao, limiteCritico);
                 elementoStatus.className = `etiqueta-estado ${statusInfo.classe}`;
-                elementoStatus.innerHTML = `<span class="ponto-etiqueta"></span> ${statusInfo.texto}`;
+                elementoStatus.innerHTML = `<i class="fa-solid fa-circle-info icone-info-etiqueta"></i> ${statusInfo.texto}`;
             }
         }
 

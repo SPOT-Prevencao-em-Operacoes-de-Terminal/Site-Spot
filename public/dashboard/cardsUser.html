@@ -18,7 +18,7 @@
     <script src="../js/alerta.js" defer></script>
 </head>
 
-<body onload="exibirMaquinas()">
+<body onload="/*validarSessao();*/ exibirMaquinas()">
     <div class="layout-aplicacao">
 
         <aside class="barra-lateral">
@@ -27,9 +27,9 @@
             </div>
 
             <nav class="menu-lateral">
-                <a href="#" class="item-menu">
+                <a href="cardsUser.html" class="item-menu">
                     <i class="fa-solid fa-gear"></i>
-                    <span>Configurações</span>
+                    <span>Servidores</span>
                 </a>
                 
                 <a href="#" class="item-menu">
@@ -68,13 +68,14 @@
                 </div>
             </div>
             </header>
+            
 
             <div class="corpo-painel">
 
                 <section class="seccao-boas-vindas">
                     <div class="texto-boas-vindas">
                         <div class="linha-destaque"></div>
-                        <h2>Bem-vindo de volta, <span class="destaque-usuario">User</span></h2>
+                        <h2>Boas-vindas, <span id="b_usuario_boas_vindas">User</span></h2>
                     </div>
 
                     <div class="ultima-atualizacao">

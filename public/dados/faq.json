@@ -1,23 +1,51 @@
 
 [
     {
-        "pergunta": "O que é a SPOT?",
-        "resposta": "A SPOT é um Sistema de Prevenção Operacional de Terminais, desenvolvido para monitorar servidores e identificar possíveis problemas na infraestrutura."
+        "pergunta": "O que é a SPOT e como ela pode ajudar minha empresa?",
+        "resposta": "A SPOT é uma plataforma de monitoramento de servidores que ajuda sua empresa a acompanhar a infraestrutura tecnológica, identificar possíveis problemas e evitar interrupções nas operações."
     },
     {
-        "pergunta": "Quais componentes a SPOT monitora?",
-        "resposta": "A plataforma monitora CPU, memória RAM, disco, temperatura do processador e uso de rede."
+        "pergunta": "Para quais empresas a SPOT é indicada?",
+        "resposta": "A SPOT foi pensada especialmente para empresas que utilizam sistemas de operação em terminais e precisam acompanhar o funcionamento dos seus servidores."
     },
     {
-        "pergunta": "Como faço para acessar a plataforma?",
-        "resposta": "Acesse a página de Login da SPOT e informe suas credenciais cadastradas."
+        "pergunta": "Como funciona o serviço da SPOT?",
+        "resposta": "A SPOT coleta informações dos servidores, analisa as condições dos componentes monitorados e apresenta os resultados em dashboards, facilitando o acompanhamento da infraestrutura."
     },
     {
-        "pergunta": "Como faço para cadastrar minha empresa?",
-        "resposta": "Entre em contato com a equipe da SPOT pelo formulário disponível no site institucional para obter informações sobre o cadastro."
+        "pergunta": "Quais problemas a SPOT ajuda a identificar?",
+        "resposta": "A plataforma ajuda a identificar situações como uso elevado de processamento, falta de memória, pouco espaço em disco e alterações no uso da rede, permitindo que a equipe tome providências."
+    },
+    {
+        "pergunta": "Preciso entender de tecnologia para utilizar a SPOT?",
+        "resposta": "Não é necessário conhecer profundamente o funcionamento dos servidores. A proposta da plataforma é apresentar as informações de maneira visual e facilitar o acompanhamento pela equipe responsável."
+    },
+    {
+        "pergunta": "A SPOT pode ajudar a evitar que minha operação pare?",
+        "resposta": "Sim. Ao identificar situações que podem indicar problemas nos servidores, a plataforma ajuda a equipe a agir preventivamente e reduzir o risco de interrupções."
+    },
+    {
+        "pergunta": "Quais informações consigo acompanhar pela plataforma?",
+        "resposta": "Você pode acompanhar informações sobre processamento, memória RAM, espaço em disco, temperatura do processador e uso da rede."
+    },
+    {
+        "pergunta": "Como fico sabendo quando algum problema é identificado?",
+        "resposta": "A SPOT utiliza classificações de status para indicar as condições dos componentes monitorados e permite que a equipe identifique situações que precisam de atenção."
     },
     {
         "pergunta": "O que significam os status Normal, Atenção e Crítico?",
-        "resposta": "São classificações utilizadas para indicar as condições dos componentes monitorados e alertar sobre possíveis problemas."
+        "resposta": "Esses status indicam as condições dos componentes monitorados. Normal representa condições dentro dos limites esperados, Atenção indica que algo merece acompanhamento e Crítico sinaliza uma situação que exige atenção imediata."
+    },
+    {
+        "pergunta": "Como posso solicitar o cadastro da minha empresa?",
+        "resposta": "Você pode preencher o formulário de contato disponível no site. Nossa equipe poderá entrar em contato para fornecer mais informações sobre a utilização da SPOT."
+    },
+    {
+        "pergunta": "Como faço para acessar a plataforma?",
+        "resposta": "Acesse a opção Login no site e informe suas credenciais cadastradas. Caso ainda não tenha acesso, entre em contato com nossa equipe."
+    },
+    {
+        "pergunta": "Como posso conhecer melhor a solução?",
+        "resposta": "Você pode entrar em contato conosco pelo formulário disponível no site institucional para esclarecer suas dúvidas e conhecer melhor a proposta da SPOT."
     }
 ]

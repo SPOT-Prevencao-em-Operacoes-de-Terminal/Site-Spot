@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="./css/como-funciona.css">
   <link rel="icon" href="./assets/icon/favicon2.ico">
   <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
@@ -107,7 +108,7 @@
     </div>
   </div>
 
-  
+
   <footer class="footer">
 
     <div class="footer-conteudo">
@@ -156,12 +157,15 @@
 
   </footer>
 
-  
+
   <!-- me locazindo -->
 
   <div id="faq" class="secao-faq">
     <div class="container">
-      <h2>Perguntas Frequentes</h2>
+      <div class="titulo-faq">
+        <i class="fa-solid fa-comments"></i>
+        <h2>Perguntas Frequentes</h2>
+      </div>
       <p class="descricao-faq">Confira as principais dúvidas sobre a plataforma SPOT.</p>
       <div id="lista-perguntas">
       </div>
@@ -229,9 +233,9 @@
 
 </body>
 
-  <script src="./js/faq.js"></script>
 
 <script>
+
 
 
   function cadastrarContato() {
@@ -292,6 +296,45 @@
 
     return false;
   }
+
+
+  //faq
+  fetch('/dados/faq.json')
+    .then(function (resposta) {
+      if (!resposta.ok) {
+        throw new Error("Não foi possível carregar o FAQ.");
+      }
+
+      return resposta.json();
+    })
+    .then(function (perguntas) {
+
+      var lista = document.getElementById("lista-perguntas");
+
+      perguntas.forEach(function (item) {
+
+        lista.innerHTML += `<div class="pergunta-faq">
+                    <button type="button" class="botao-pergunta">${item.pergunta}</button>
+                    <div class="resposta-faq"><p>${item.resposta}</p></div>
+                </div>
+            `;
+
+      });
+
+      var botoes = document.querySelectorAll(".botao-pergunta");
+      botoes.forEach(function (botao) {
+        botao.addEventListener("click", function () {
+          var resposta = botao.nextElementSibling;
+          resposta.classList.toggle("ativa");
+        });
+
+      });
+
+    })
+    .catch(function (erro) {
+      console.log("Erro ao carregar as perguntas:", erro);
+    });
+
 
 </script>
 

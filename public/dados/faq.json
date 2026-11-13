@@ -1,51 +1,50 @@
-
 [
     {
-        "pergunta": "O que é a SPOT e como ela pode ajudar minha empresa?",
-        "resposta": "A SPOT é uma plataforma de monitoramento de servidores que ajuda sua empresa a acompanhar a infraestrutura tecnológica, identificar possíveis problemas e evitar interrupções nas operações."
+        "pergunta": "Por que minha empresa deveria utilizar a SPOT?",
+        "resposta": "A SPOT ajuda sua empresa a acompanhar o funcionamento dos servidores utilizados nas operações do terminal, permitindo identificar possíveis problemas antes que eles causem grandes impactos."
     },
     {
-        "pergunta": "Para quais empresas a SPOT é indicada?",
-        "resposta": "A SPOT foi pensada especialmente para empresas que utilizam sistemas de operação em terminais e precisam acompanhar o funcionamento dos seus servidores."
+        "pergunta": "Como a SPOT pode ajudar no dia a dia da minha empresa?",
+        "resposta": "Com a SPOT, sua equipe consegue acompanhar as condições dos servidores por meio de uma plataforma visual, facilitando a identificação de situações que precisam de atenção."
     },
     {
-        "pergunta": "Como funciona o serviço da SPOT?",
-        "resposta": "A SPOT coleta informações dos servidores, analisa as condições dos componentes monitorados e apresenta os resultados em dashboards, facilitando o acompanhamento da infraestrutura."
+        "pergunta": "A SPOT é indicada para empresas de qual segmento?",
+        "resposta": "A solução foi desenvolvida pensando especialmente em empresas que utilizam sistemas de operação em terminais (TOS) e precisam acompanhar o funcionamento de sua infraestrutura."
     },
     {
-        "pergunta": "Quais problemas a SPOT ajuda a identificar?",
-        "resposta": "A plataforma ajuda a identificar situações como uso elevado de processamento, falta de memória, pouco espaço em disco e alterações no uso da rede, permitindo que a equipe tome providências."
+        "pergunta": "Minha empresa precisa esperar um problema acontecer para agir?",
+        "resposta": "Não. A proposta da SPOT é ajudar a identificar alterações nas condições dos servidores antecipadamente, permitindo que a equipe responsável tome providências antes que a situação se agrave."
     },
     {
-        "pergunta": "Preciso entender de tecnologia para utilizar a SPOT?",
-        "resposta": "Não é necessário conhecer profundamente o funcionamento dos servidores. A proposta da plataforma é apresentar as informações de maneira visual e facilitar o acompanhamento pela equipe responsável."
+        "pergunta": "A SPOT ajuda a evitar interrupções nas operações?",
+        "resposta": "Sim. Ao acompanhar as condições dos servidores e identificar possíveis riscos, a SPOT contribui para que a equipe aja preventivamente e reduza as chances de interrupções inesperadas."
     },
     {
-        "pergunta": "A SPOT pode ajudar a evitar que minha operação pare?",
-        "resposta": "Sim. Ao identificar situações que podem indicar problemas nos servidores, a plataforma ajuda a equipe a agir preventivamente e reduzir o risco de interrupções."
+        "pergunta": "Preciso ter conhecimentos técnicos para entender as informações da SPOT?",
+        "resposta": "A plataforma apresenta as informações por meio de dashboards e classificações visuais, facilitando o acompanhamento. Para interpretar situações técnicas mais específicas e realizar intervenções, a equipe responsável pela infraestrutura poderá ser acionada."
     },
     {
-        "pergunta": "Quais informações consigo acompanhar pela plataforma?",
-        "resposta": "Você pode acompanhar informações sobre processamento, memória RAM, espaço em disco, temperatura do processador e uso da rede."
+        "pergunta": "Como vou saber se algo não está funcionando corretamente?",
+        "resposta": "A SPOT apresenta classificações de status, como Normal, Atenção e Crítico, que ajudam a identificar as condições dos componentes monitorados e perceber quando alguma situação precisa ser analisada."
     },
     {
-        "pergunta": "Como fico sabendo quando algum problema é identificado?",
-        "resposta": "A SPOT utiliza classificações de status para indicar as condições dos componentes monitorados e permite que a equipe identifique situações que precisam de atenção."
+        "pergunta": "Quais benefícios o monitoramento pode trazer para minha empresa?",
+        "resposta": "O monitoramento permite acompanhar melhor a infraestrutura, identificar possíveis sobrecargas, observar o histórico de funcionamento e apoiar decisões para evitar problemas nas operações."
     },
     {
-        "pergunta": "O que significam os status Normal, Atenção e Crítico?",
-        "resposta": "Esses status indicam as condições dos componentes monitorados. Normal representa condições dentro dos limites esperados, Atenção indica que algo merece acompanhamento e Crítico sinaliza uma situação que exige atenção imediata."
+        "pergunta": "A SPOT acompanha o funcionamento dos servidores continuamente?",
+        "resposta": "Sim. A solução realiza a coleta contínua de informações dos servidores, permitindo acompanhar as condições dos componentes monitorados ao longo do tempo."
     },
     {
-        "pergunta": "Como posso solicitar o cadastro da minha empresa?",
-        "resposta": "Você pode preencher o formulário de contato disponível no site. Nossa equipe poderá entrar em contato para fornecer mais informações sobre a utilização da SPOT."
+        "pergunta": "Como posso contratar ou conhecer melhor a SPOT?",
+        "resposta": "Você pode preencher o formulário de contato disponível nesta página. Nossa equipe poderá conversar com você e fornecer mais informações sobre a solução."
     },
     {
-        "pergunta": "Como faço para acessar a plataforma?",
-        "resposta": "Acesse a opção Login no site e informe suas credenciais cadastradas. Caso ainda não tenha acesso, entre em contato com nossa equipe."
+        "pergunta": "Como faço para começar a utilizar a SPOT?",
+        "resposta": "O primeiro passo é entrar em contato com nossa equipe pelo formulário do site. Assim, você poderá obter orientações sobre o cadastro da empresa e o acesso à plataforma."
     },
     {
-        "pergunta": "Como posso conhecer melhor a solução?",
-        "resposta": "Você pode entrar em contato conosco pelo formulário disponível no site institucional para esclarecer suas dúvidas e conhecer melhor a proposta da SPOT."
+        "pergunta": "A SPOT substitui os profissionais responsáveis pela infraestrutura da empresa?",
+        "resposta": "Não. A SPOT é uma ferramenta de apoio ao acompanhamento da infraestrutura. Ela ajuda a identificar situações que merecem atenção, enquanto os profissionais responsáveis avaliam e realizam as ações necessárias."
     }
 ]

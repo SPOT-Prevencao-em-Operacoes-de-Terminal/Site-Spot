@@ -573,8 +573,8 @@ transform: scale(1.02);
 }
 
 .secao-faq h2 {
-    text-align: center;
-    color: #052844;
+  text-align: center;
+  color: #052844;
     font-size: 36px;
     margin-bottom: 5px;
 }
@@ -620,8 +620,6 @@ transform: scale(1.02);
     background-color: #edf3f7;
 }
 
-/* Respostas */
-
 .resposta-faq {
     display: none;
     padding: 0 20px 18px;
@@ -635,7 +633,6 @@ transform: scale(1.02);
 }
 
 
-/* ---*/
 .titulo-faq {
     display: flex;
     justify-content: center;

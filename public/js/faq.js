@@ -4,7 +4,6 @@ fetch('dados/faq.json')
         return resposta.json();
     })
     .then(function (perguntas) {
-git 
         let lista = document.getElementById('lista-perguntas');
 
         perguntas.forEach(function (item) {

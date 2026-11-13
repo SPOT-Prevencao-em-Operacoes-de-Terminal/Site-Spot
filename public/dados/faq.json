@@ -1,0 +1,23 @@
+
+[
+    {
+        "pergunta": "O que é a SPOT?",
+        "resposta": "A SPOT é um Sistema de Prevenção Operacional de Terminais, desenvolvido para monitorar servidores e identificar possíveis problemas na infraestrutura."
+    },
+    {
+        "pergunta": "Quais componentes a SPOT monitora?",
+        "resposta": "A plataforma monitora CPU, memória RAM, disco, temperatura do processador e uso de rede."
+    },
+    {
+        "pergunta": "Como faço para acessar a plataforma?",
+        "resposta": "Acesse a página de Login da SPOT e informe suas credenciais cadastradas."
+    },
+    {
+        "pergunta": "Como faço para cadastrar minha empresa?",
+        "resposta": "Entre em contato com a equipe da SPOT pelo formulário disponível no site institucional para obter informações sobre o cadastro."
+    },
+    {
+        "pergunta": "O que significam os status Normal, Atenção e Crítico?",
+        "resposta": "São classificações utilizadas para indicar as condições dos componentes monitorados e alertar sobre possíveis problemas."
+    }
+]

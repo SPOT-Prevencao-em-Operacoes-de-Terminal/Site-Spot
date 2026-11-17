@@ -506,3 +506,17 @@ body.pagina-login {
     border: 1px solid #bfe3f0;
     color: #003b73;
 }
+
+/* Texto de ajuda para criação da senha */
+.pagina-login .ajuda-senha {
+    display: none;
+    margin: 6px 0 0;
+    color: #777;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Exibe a orientação quando o campo estiver selecionado */
+.pagina-login .input-senha:focus + .ajuda-senha {
+    display: block;
+}

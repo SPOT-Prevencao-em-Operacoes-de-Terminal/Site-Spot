@@ -3,3 +3,7 @@ node_modules
 package-lock.json
 
 .github
+
+# Credenciais
+.env
+.env.dev

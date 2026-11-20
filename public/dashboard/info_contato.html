@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPOT | Dashboard do Computador</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="./../css/dashboards.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/sessao.js" defer></script>
+    <script src="../js/alerta.js" defer></script>
+</head>
+
+<body onload="inicializarDashboard()">
+    <div class="layout-aplicacao">
+
+        <aside class="barra-lateral">
+            <div class="area-marca">
+                <img src="../assets/icon/logo-branca.png" alt="Logo SPOT" class="imagem-logo">
+            </div>
+
+            <nav class="menu-lateral">
+                <div class="grupo-menu">
+                     <a href="info_contato.html" class="item-menu">
+                     <i class="fa-solid fa-user-plus"></i>
+                     <span>Informações de contato  </span>
+                    </a>
+                    <a href="./cardsUser.html" class="item-menu">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Visão Geral</span>
+                    </a>
+                    
+                    <a href="javascript:void(0)" class="item-menu" onclick="abrirModalHistorico()">
+                        <i class="fa-solid fa-clock"></i>
+                        <span>Histórico</span>
+                    </a>
+                    
+                </div>
+            </nav>
+
+            <div class="rodape-lateral">
+                <div class="linha-rodape"></div>
+                <p>Mais controle,<br>menos riscos.</p>
+            </div>
+        </aside>
+
+        <div class="formulario">
+
+        </div>

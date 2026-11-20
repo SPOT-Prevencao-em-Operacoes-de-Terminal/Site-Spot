@@ -46,7 +46,7 @@ function carregarContatos() {
         return;
     }
 
-    fetch(`/contato/listar/${idUsuario}`)
+fetch(`/info_contato/listar/${idUsuario}`)
         .then(function (resposta) {
 
             if (!resposta.ok) {
@@ -347,8 +347,7 @@ function salvarContato(event) {
 
     if (idEmEdicao === null) {
 
-        fetch("/contato/cadastrar", {
-
+        fetch("/info_contato/cadastrar", {
             method: "POST",
 
             headers: {
@@ -394,8 +393,7 @@ function salvarContato(event) {
 
     else {
 
-        fetch(`/contato/editar/${idUsuario}/${idEmEdicao}`, {
-
+        fetch(`/info_contato/editar/${idUsuario}/${idEmEdicao}`, {
             method: "PUT",
 
             headers: {
@@ -466,8 +464,7 @@ function confirmarExclusao() {
         return;
     }
 
-    fetch(`/contato/excluir/${idUsuario}/${idParaExcluir}`, {
-
+    fetch(`/info_contato/excluir/${idUsuario}/${idParaExcluir}`, {
         method: "DELETE"
 
     })

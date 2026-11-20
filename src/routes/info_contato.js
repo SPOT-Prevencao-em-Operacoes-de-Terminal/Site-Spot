@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-var contatoController = require("../controllers/contatoController");
+var contatoController = require("../controllers/info_contatoController");
 
 // Recebendo os dados do HTML e direcionando para a função cadastrar de contatoController.js
 router.post("/cadastrar", function (req, res) {

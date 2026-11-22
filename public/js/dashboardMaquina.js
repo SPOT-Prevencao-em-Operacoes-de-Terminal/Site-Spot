@@ -1,14 +1,8 @@
-
-// Tela "Monitoramento do Servidor" (dashboardAdmin.html e dashboardUser.html)
-// Regra de estados (definida pelo grupo):
-//   Crítico  : valor >= limite
-//   Atenção  : valor >= limite - 5
-//   Normal   : abaixo disso
 const INTERVALO_MS = 5000;
 const MAX_PONTOS = 30;
 const MARGEM_ATENCAO = 5;
-const ESCALA_REDE_PADRAO = 10; // MB/s, só para a barra quando não há limite
-const COMPONENTES = { cpu: 1, disco: 2, ram: 3, rede: 6 };
+const ESCALA_REDE_PADRAO = 10; 
+const COMPONENTES = { cpu: 1, disco: 2, ram: 3, rede: 4 };
  
 let meuGrafico = null;
 let timerPolling = null;
@@ -21,9 +15,10 @@ function esc(texto) {
     });
 }
  
-function fmt(n) {
+function fmt(n, casas) {
     n = Number(n);
-    return Number.isInteger(n) ? String(n) : n.toFixed(1);
+    if (casas === undefined) casas = 1;
+    return Number.isInteger(n) ? String(n) : n.toFixed(casas);
 }
  
 function sufixoDe(unidade) {
@@ -109,11 +104,22 @@ function atualizarTooltip(chave, limite, sufixo) {
 }
  
 function atualizarKPI(chave, item) {
-    const valor = Math.round(Number(item.valor) * 10) / 10;
+    const ehPercentual = item.unidade_medida === "%";
+    // % é arredondado em 1 casa; tráfego (MB/s) mantém o valor real para os cálculos
+    const valor = ehPercentual ? Math.round(Number(item.valor) * 10) / 10 : Number(item.valor);
     const limite = item.limite === null || item.limite === undefined ? null : Number(item.limite);
     const sufixo = sufixoDe(item.unidade_medida);
  
-    document.getElementById(`valor-kpi-${chave}`).innerText = `${fmt(valor)}${sufixo}`;
+    // Tráfego abaixo de 1 MB/s é mostrado em KB/s, senão aparece "0.00 MB/s"
+    let textoValor;
+    if (ehPercentual) {
+        textoValor = `${fmt(valor, 1)}${sufixo}`;
+    } else if (valor < 1) {
+        textoValor = `${(valor * 1024).toFixed(1)} KB/s`;
+    } else {
+        textoValor = `${fmt(valor, 2)}${sufixo}`;
+    }
+    document.getElementById(`valor-kpi-${chave}`).innerText = textoValor;
  
     const barra = document.getElementById(`barra-kpi-${chave}`);
     if (barra) {

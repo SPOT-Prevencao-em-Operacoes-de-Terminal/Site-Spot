@@ -1,7 +1,20 @@
-
 var database = require("../database/config");
- 
-// Cards da tela de servidores: último valor de CPU (1), Disco (2) e RAM (3) + limites
+
+// --- Cadastro de máquina (grupo) ---
+function cadastrar(hostname, sistemaOperacional, fkEmpresa, localizacao, macAddress, uuid) {
+    // Garante que, se o MAC Address vier vazio/null, seja inserido NULL no MySQL em vez de texto 'null'
+    var valorMac = macAddress ? `'${macAddress}'` : "NULL";
+
+    var instrucaoSql = `
+        INSERT INTO servidor (hostname, sistema_operacional, fk_empresa, localizacao, macAddress, UUID)
+        VALUES ('${hostname}', '${sistemaOperacional}', ${fkEmpresa}, '${localizacao}', ${valorMac}, '${uuid}');
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+// --- Cards da tela de servidores: último valor de CPU (1), Disco (2) e RAM (3) + limites ---
 function listarPorEmpresa(idEmpresa) {
     var instrucaoSql = `
         SELECT s.id_servidor, s.hostname,
@@ -23,6 +36,8 @@ function listarPorEmpresa(idEmpresa) {
     `;
     return database.executar(instrucaoSql, [idEmpresa]);
 }
- 
-module.exports = { listarPorEmpresa };
- 
+
+module.exports = {
+    cadastrar,
+    listarPorEmpresa
+};

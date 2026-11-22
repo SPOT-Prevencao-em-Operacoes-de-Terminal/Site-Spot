@@ -1,0 +1,377 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPOT | Informações de Contato</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="./../css/info_contato.css">
+    <link rel="stylesheet" href="./../css/dashboards.css">
+
+</head>
+
+<body>
+
+    <div class="layout-aplicacao">
+
+        <aside class="barra-lateral">
+
+            <div class="area-marca">
+                <img src="../assets/icon/logo-branca.png"
+                    alt="Logo SPOT"
+                    class="imagem-logo">
+            </div>
+
+            <nav class="menu-lateral">
+
+                <a href="cardsUser.html" class="item-menu">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Servidores</span>
+                </a>
+
+                <a href="#" class="item-menu">
+                    <i class="fa-solid fa-server"></i>
+                    <span>Cadastrar Nova Máquina</span>
+                </a>
+
+                <a href="info_contato.html" class="item-menu ativo">
+                    <i class="fa-solid fa-address-book"></i>
+                    <span>Informações de Contato</span>
+                </a>
+
+            </nav>
+
+            <div class="rodape-lateral">
+
+                <div class="linha-rodape"></div>
+
+                <p>
+                    Encontrou alguma irregularidade?
+
+                    <a href="https://spotsystemmonitoring.atlassian.net/jira/software/form/f4f1029a-17f9-4b6a-bf14-4c41de5b8d0c?atlOrigin=eyJpIjoiNmZjOWIyNjVlYTVhNDA1NmI1NTEwMzkxNjYyNmI4MDciLCJwIjoiaiJ9"
+                        target="_blank"
+                        style="color: #D1D5DB;">
+
+                        Clique aqui
+
+                    </a>
+
+                    e informe nossa equipe.
+                </p>
+
+            </div>
+
+        </aside>
+
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="conteudo-principal">
+
+            <!-- CABEÇALHO -->
+            <header class="cabecalho-superior">
+
+                <nav class="navegacao-cabecalho">
+
+                    <a href="cardsUser.html" class="aba-navegacao">
+                        <i class="fa-solid fa-server"></i>
+                        <span>Visão Geral dos Servidores</span>
+                    </a>
+
+                    <a href="#" class="aba-navegacao">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+
+                    <a href="#" class="aba-navegacao activa">
+                        <i class="fa-solid fa-address-book"></i>
+                        <span>Informações de Contato</span>
+                    </a>
+
+                </nav>
+
+                <div class="perfil-usuario">
+
+                    <div class="avatar-usuario">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <span class="nome-usuario">
+                        Olá, <strong id="b_usuario">User</strong>
+                    </span>
+
+                    <div class="menu-dropdown-usuario"
+                        id="menu-dropdown-usuario">
+
+                        <a href="../login.html"
+                            class="item-dropdown-logout"
+                            onclick="limparSessao()">
+
+                            <i class="fa-solid fa-right-from-bracket"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- CORPO DO PAINEL -->
+            <div class="corpo-painel">
+
+                <div class="cabecalho-dashboard">
+
+                    <h2>Informações de Contato</h2>
+
+                    <p class="subtitulo-contato">
+                        Gerencie seus meios de contato cadastrados no SPOT.
+                    </p>
+
+                </div>
+
+
+                <!-- KPIs / CARTÕES DE CONTATO -->
+                <section class="secao-contatos" id="lista-contatos">
+
+    <!-- Os cartões de contato serão renderizados pelo JavaScript --></section>
+
+
+                <!-- BOTÃO ADICIONAR -->
+                <div class="area-adicionar-contato">
+
+                    <button class="btn-adicionar-contato"
+                        onclick="abrirModalContato()">
+
+                        <i class="fa-solid fa-plus"></i>
+                        Adicionar nova informação
+
+                    </button>
+
+                </div>
+
+
+                <!-- AVISO -->
+                <div class="aviso-contatos">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                    <p>
+                        Mantenha suas informações atualizadas para facilitar
+                        o contato da equipe SPOT quando necessário.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- MODAL DE ADICIONAR / EDITAR -->
+    <div class="modal-overlay" id="modal-contato">
+
+        <div class="modal-container modal-contato-container">
+
+            <div class="modal-cabecalho">
+
+                <div class="titulo-modal">
+
+                    <i class="fa-solid fa-address-book"></i>
+
+                    <h3 id="titulo-modal-contato">
+                        Adicionar contato
+                    </h3>
+
+                </div>
+
+                <button class="btn-fechar-modal"
+                    onclick="fecharModalContato()">
+
+                    &times;
+
+                </button>
+
+            </div>
+
+
+            <!-- FORMULÁRIO -->
+            <form id="form-contato" onsubmit="salvarContato(event)">
+
+                <div class="modal-corpo modal-corpo-contato">
+
+                    <!-- TIPO DE CONTATO -->
+                    <div class="campo-formulario">
+
+                        <label for="tipo-contato">
+                            Tipo de contato
+                        </label>
+
+                        <select id="tipo-contato" required>
+
+                            <option value="" disabled selected>
+                                Selecione o tipo
+                            </option>
+
+                            <option value="email">
+                                E-mail
+                            </option>
+
+                            <option value="telefone">
+                                Telefone
+                            </option>
+
+                         </select>
+
+                    </div>
+
+
+                    <!-- VALOR DO CONTATO -->
+                    <div class="campo-formulario">
+
+                        <label for="valor-contato-form">
+                            Informação
+                        </label>
+
+                        <input type="text"
+                            id="valor-contato-form"
+                            placeholder="Digite sua informação"
+                            required>
+
+                        <span class="mensagem-validacao"
+                            id="mensagem-validacao">
+
+                        </span>
+
+                    </div>
+
+
+                    <!--
+                    =====================================================
+                    LOCAL DE INTEGRAÇÃO COM A ROTA DE INSERÇÃO/EDIÇÃO
+
+                    Quando o usuário clicar em salvar:
+
+                    - Se estiver adicionando:
+                      POST /usuarios/{id}/contatos
+
+                    - Se estiver editando:
+                      PUT /contatos/{id}
+
+                    O identificador do usuário deve ser obtido pela
+                    sessão/autenticação e não confiado somente pelo HTML.
+
+                    =====================================================
+                    -->
+
+                </div>
+
+
+                <!-- BOTÕES -->
+                <div class="modal-acoes-contato">
+
+                    <button type="button"
+                        class="btn-cancelar-contato"
+                        onclick="fecharModalContato()">
+
+                        Cancelar
+
+                    </button>
+
+                    <button type="submit"
+                        class="btn-salvar-contato">
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Salvar informação
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- MODAL DE CONFIRMAÇÃO DE EXCLUSÃO -->
+    <div class="modal-overlay" id="modal-exclusao">
+
+        <div class="modal-container modal-confirmacao">
+
+            <div class="modal-cabecalho">
+
+                <div class="titulo-modal">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                    <h3>Excluir contato</h3>
+
+                </div>
+
+                <button class="btn-fechar-modal"
+                    onclick="fecharModalExclusao()">
+
+                    &times;
+
+                </button>
+
+            </div>
+
+            <div class="modal-corpo modal-corpo-confirmacao">
+
+                <p>
+                    Tem certeza de que deseja excluir esta informação
+                    de contato?
+                </p>
+
+                <p class="texto-confirmacao">
+                    Esta ação não poderá ser desfeita.
+                </p>
+
+            </div>
+
+            <div class="modal-acoes-contato">
+
+                <button class="btn-cancelar-contato"
+                    onclick="fecharModalExclusao()">
+
+                    Cancelar
+
+                </button>
+
+                <button class="btn-confirmar-exclusao"
+                    onclick="confirmarExclusao()">
+
+                    <i class="fa-solid fa-trash"></i>
+                    Excluir
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+   <script src="../js/sessao.js"></script>
+    <script src="../js/info_contato.js"></script>
+
+</body>
+
+</html>

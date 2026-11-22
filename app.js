@@ -24,6 +24,7 @@ var empresasRouter = require("./src/routes/empresas");
 var contatosRouter = require("./src/routes/contatos");
 var info_contato = require("./src/routes/info_contato");
 var servidoresRouter = require("./src/routes/servidores");
+var alertasRouter = require("./src/routes/alertas");
 
 
 app.use(express.json());
@@ -41,6 +42,7 @@ app.use("/empresas", empresasRouter);
 app.use("/contatos", contatosRouter);
 app.use("/info_contato", info_contato);
 app.use("/servidores", servidoresRouter);
+app.use("/alertas", alertasRouter);
 
 
 app.listen(PORTA_APP, function () {

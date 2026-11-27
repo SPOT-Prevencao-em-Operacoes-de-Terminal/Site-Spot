@@ -11,4 +11,8 @@ router.get("/listar/:idEmpresa", function (req, res) {
     servidorController.listarPorEmpresa(req, res);
 });
 
+router.delete("/deletar/:idServidor", function (req, res) {
+    servidorController.deletar(req, res);
+});
+
 module.exports = router;

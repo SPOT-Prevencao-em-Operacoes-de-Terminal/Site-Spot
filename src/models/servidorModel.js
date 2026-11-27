@@ -37,7 +37,41 @@ function listarPorEmpresa(idEmpresa) {
     return database.executar(instrucaoSql, [idEmpresa]);
 }
 
+function deletar(idServidor, fkEmpresa) {
+    var sqlAlertas = `
+        DELETE a FROM alerta a
+        INNER JOIN leitura l ON a.fk_leitura = l.id_leitura
+        INNER JOIN servidor s ON l.fk_configServidor = s.id_servidor
+        WHERE s.id_servidor = ${idServidor} AND s.fk_empresa = ${fkEmpresa};
+    `;
+
+    var sqlLeituras = `
+        DELETE l FROM leitura l
+        INNER JOIN servidor s ON l.fk_configServidor = s.id_servidor
+        WHERE s.id_servidor = ${idServidor} AND s.fk_empresa = ${fkEmpresa};
+    `;
+
+    var sqlConfiguracoes = `
+        DELETE c FROM configuracao c
+        INNER JOIN servidor s ON c.fk_servidor = s.id_servidor
+        WHERE s.id_servidor = ${idServidor} AND s.fk_empresa = ${fkEmpresa};
+    `;
+
+    var sqlServidor = `
+        DELETE FROM servidor
+        WHERE id_servidor = ${idServidor} AND fk_empresa = ${fkEmpresa};
+    `;
+
+    console.log("Executando exclusão em cascata do servidor ID:", idServidor);
+
+    return database.executar(sqlAlertas)
+        .then(() => database.executar(sqlLeituras))
+        .then(() => database.executar(sqlConfiguracoes))
+        .then(() => database.executar(sqlServidor));
+}
+
 module.exports = {
     cadastrar,
-    listarPorEmpresa
+    listarPorEmpresa,
+    deletar
 };

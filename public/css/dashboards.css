@@ -996,3 +996,69 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+.acoes-cabecalho-cartao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.botao-excluir-maquina {
+    background: transparent;
+    border: none;
+    color: #94A3B8;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: color 0.15s, background-color 0.15s;
+}
+
+.botao-excluir-maquina:hover {
+    color: #DC2626;
+    background-color: #FEF2F2;
+}
+
+.caixa-modal-compacta {
+    max-width: 480px;
+}
+
+.icone-titulo-modal.perigo {
+    background-color: rgba(239, 68, 68, 0.18);
+    color: #F87171;
+}
+
+.texto-confirmacao-exclusao {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: #334155;
+}
+
+.botao-modal-perigo {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    background-color: #DC2626;
+    color: #FFFFFF;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.15s;
+}
+
+.botao-modal-perigo:hover {
+    background-color: #B91C1C;
+}
+
+.botao-modal-perigo:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}

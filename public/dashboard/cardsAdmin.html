@@ -236,6 +236,43 @@
             </form>
         </div>
     </div>
+
+    <!-- MODAL: EXCLUIR MÁQUINA -->
+<div class="modal-sobreposicao" id="modal_exclusao_maquina" onclick="fecharModalExclusaoMaquinaFora(event)">
+    <div class="caixa-modal caixa-modal-compacta" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_exclusao_maquina">
+        <div class="cabecalho-modal">
+            <div class="titulo-modal-grupo">
+                <div class="icone-titulo-modal perigo">
+                    <i class="fa-solid fa-trash-can"></i>
+                </div>
+                <div>
+                    <h3 id="titulo_modal_exclusao_maquina">Excluir Máquina</h3>
+                    <p>Esta ação removerá o servidor e seu histórico</p>
+                </div>
+            </div>
+            <button type="button" class="botao-fechar-modal" onclick="fecharModalExclusaoMaquina()" aria-label="Fechar janela">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="corpo-modal">
+            <div id="feedback_modal_exclusao" class="alerta-modal" style="display: none;"></div>
+            <p class="texto-confirmacao-exclusao">
+                Tem certeza de que deseja excluir a máquina <strong id="nome_maquina_exclusao"></strong>?
+                Essa ação não poderá ser desfeita.
+            </p>
+        </div>
+
+        <div class="rodape-modal">
+            <button type="button" class="botao-modal-secundario" onclick="fecharModalExclusaoMaquina()">
+                Cancelar
+            </button>
+            <button type="button" class="botao-modal-perigo" id="btn_confirmar_exclusao_maquina" onclick="confirmarExclusaoMaquina()">
+                <i class="fa-solid fa-trash"></i> Sim, excluir
+            </button>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>

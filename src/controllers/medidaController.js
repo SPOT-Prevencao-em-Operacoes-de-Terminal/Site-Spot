@@ -1,7 +1,7 @@
 
 var medidaModel = require("../models/medidaModel");
  
-var ID_CPU = 1, ID_DISCO = 2, ID_RAM = 3;
+var ID_CPU = 1, ID_DISCO = 2, ID_RAM = 3, ID_REDE = 4;
  
 function idValido(valor) {
     var n = Number(valor);
@@ -29,14 +29,17 @@ function buscarUltimas(req, res) {
     Promise.all([
         medidaModel.buscarUltimas(idServidor, ID_CPU, limite),
         medidaModel.buscarUltimas(idServidor, ID_RAM, limite),
-        medidaModel.buscarUltimas(idServidor, ID_DISCO, limite)
+        medidaModel.buscarUltimas(idServidor, ID_DISCO, limite),
+        medidaModel.buscarUltimas(idServidor, ID_REDE, limite)
+
     ])
         .then(function (series) {
             // o model devolve do mais novo ao mais antigo; o gráfico precisa do inverso
             res.status(200).json({
                 cpu: series[0].reverse(),
                 ram: series[1].reverse(),
-                disco: series[2].reverse()
+                disco: series[2].reverse(),
+                rede: series[3].reverse()
             });
         })
         .catch(function (erro) {
